@@ -1,0 +1,20 @@
+Aihemäärittely
+Aihe: Tetris
+Toteutetaan ohjelma, jossa kasataan putoavia palikoita aukottomiksi riveiksi, jotta ne poistuvat pelialueelta. Tarkoitus on pitää pelialue mahdollismman tyhjänä. Jos palikat kasaantuvat pelialueen ylälaitaan asti, pelaaja häviää ja peli on päättynyt.
+
+Palikat ilmestyvät ruudun ylälaitaan erilaisissa neljän palikan muodostelmissa ja putoavat kohti ruudun alalaitaa tasaisella vauhdilla. Kun pelaaja saa kokonaisen rivin valmiiksi, se katoaa ruudulta ja antaa tilaa seuraaville palikoille. Pelaajan pistemäärä myös kasvaa. Pistemäärän kasvaessa palikoiden putoamisvauhti kiihtyy hiljalleen, jolloin pelin vaikeustaso kasvaa. Peli pitää kirjaa suurimmista ansaituista pistemääristä.
+
+Pelaaja voi siirtää palikkamuodostelmia oikealle ja vasemmalle, kiertää niitä vasta- tai myötäpäivään, kiihdyttää niiden putoamista, tai tiputtaa ne välittömästi pinon päälle. Palikkamuodostelmat pysyvät aina yhteisinä ja niiden muoto on aina sama.
+
+Käyttäjät: Pelaaja
+
+Pelaajan toiminnot:
+- Palikkamuodostelman siirtäminen (oikealle, vasemmalle, alas)
+- Palikkamuodostelman tiputtaminen
+- Palikkamuodostelman kiertäminen (vasta- tai myötäpäivään)
+
+Pelin toiminnot:
+- Palikkamuodostelmien tuottaminen
+- Pisteiden kirjanpito
+- Pisteiden tallentaminen
+- Rivien tuhoaminen
