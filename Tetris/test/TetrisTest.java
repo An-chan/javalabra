@@ -1,19 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.domain.Palikka;
 
-/**
- *
- * @author Anni
- */
+
 public class TetrisTest {
     
     public TetrisTest() {
@@ -34,9 +27,20 @@ public class TetrisTest {
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    
+    @Test
+    public void tormaysTrueTest(){
+        Palikka eka = new Palikka(2, 3);
+        Palikka toka = new Palikka(3, 3);
+        assertEquals(eka.tormaa(toka), true);
+    }
+    
+    @Test
+    public void tormaysFalseTest(){
+        Palikka eka = new Palikka(2, 3);
+        Palikka toka = new Palikka(5, 3);
+        assertEquals(eka.tormaa(toka), false);
+    }
     // @Test
     // public void hello() {}
 }

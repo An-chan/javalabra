@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tetris.domain;
 
-/**
- *
- * @author Anni
- */
+// Sisältää kaikki mahdolliset tetrominojen muodot
 public enum Muoto {
-    
+    L, peiliL, T, nelio, I, S, peiliS;
 }
