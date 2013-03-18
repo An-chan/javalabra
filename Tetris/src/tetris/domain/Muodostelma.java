@@ -2,6 +2,7 @@
 package tetris.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Muodostelma {
     private Muoto muoto;
@@ -11,7 +12,9 @@ public class Muodostelma {
     private int y;
     
     public Muodostelma(Muoto muoto){
+        this.palikat = new ArrayList<Palikka>();
         this.muoto = muoto;
+        luoPalikat();
     }
     
     public void luoPalikat(){
@@ -49,19 +52,29 @@ public class Muodostelma {
                 palikat.add(new Palikka(1, 5));
                 break;
             case peiliS:
+                palikat.add(new Palikka(0, 3));
+                palikat.add(new Palikka(0, 4));
                 palikat.add(new Palikka(1, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
                 palikat.add(new Palikka(1, 5));
                 break;
             case T:
                 palikat.add(new Palikka(0, 4));
                 palikat.add(new Palikka(0, 5));
+                palikat.add(new Palikka(0, 6));
                 palikat.add(new Palikka(1, 5));
-                palikat.add(new Palikka(1, 6));
                 break;
         
         }
+    }
+    
+    public void putoa(){
+        for (Palikka palikka : palikat) {
+            palikka.putoa();
+        }
+    }
+    
+    public List getPalikat(){
+        return this.palikat;
     }
 
 }

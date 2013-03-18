@@ -43,4 +43,20 @@ public class Palikka {
         return this.y;
     }
     
+    // Palikka putoaa yhden ruudun alaspäin
+    public void putoa(){
+        this.x++;
+    }
+    
+    // Palikkaa siirretään joko yksi ruutu oikealle (+1) tai vasemmalle (-1)
+    public void siirra(int yMuutos){
+        if (this.y + yMuutos < 0){
+            
+        } else if (this.y + yMuutos > 10){
+            
+        } else {
+            this.y = this.y + yMuutos;
+        }
+    }
+    
 }
