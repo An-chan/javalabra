@@ -7,6 +7,7 @@ import java.util.List;
 public class Muodostelma {
     private Muoto muoto;
     private ArrayList<Palikka> palikat;
+    private boolean putoaa;
     // Nämä ehkä tarpeettomia?
     private int x;
     private int y;
@@ -14,6 +15,7 @@ public class Muodostelma {
     public Muodostelma(Muoto muoto){
         this.palikat = new ArrayList<Palikka>();
         this.muoto = muoto;
+        this.putoaa = true;
         luoPalikat();
     }
     
@@ -67,10 +69,22 @@ public class Muodostelma {
         }
     }
     
+    // pudotetaan palikkamuodostelmaa yksi ruutu alaspäin
     public void putoa(){
         for (Palikka palikka : palikat) {
             palikka.putoa();
         }
+    }
+    
+    //siirretään koko muodostelmaa joko yhden ruudun verran vasemmalle (-1) tai oikealle (1)
+    public void siirra(int ymuutos){
+        for (Palikka palikka : palikat){
+            palikka.siirra(ymuutos);
+        }
+    }
+    
+    public void tormays(){
+        
     }
     
     public List getPalikat(){

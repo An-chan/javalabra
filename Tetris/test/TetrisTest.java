@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import tetris.domain.*;
-import tetris.Tetris;
+import tetris.Main;
 
 
 public class TetrisTest {

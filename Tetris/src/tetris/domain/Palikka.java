@@ -50,11 +50,7 @@ public class Palikka {
     
     // Palikkaa siirretään joko yksi ruutu oikealle (+1) tai vasemmalle (-1)
     public void siirra(int yMuutos){
-        if (this.y + yMuutos < 0){
-            
-        } else if (this.y + yMuutos > 10){
-            
-        } else {
+        if (this.y + yMuutos > 0 && this.y + yMuutos <= 10){
             this.y = this.y + yMuutos;
         }
     }
