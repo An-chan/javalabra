@@ -16,7 +16,7 @@ public class NappisKuuntelija extends KeyAdapter {
              int keycode = e.getKeyCode();
 
              if (keycode == 'p' || keycode == 'P') {
-                 //peli paussille, toiminto puuttuu toistaiseksi
+                 peli.pausePaallePois();
              }
 
              switch (keycode) {

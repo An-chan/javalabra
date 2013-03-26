@@ -3,16 +3,19 @@ package tetris.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import tetris.peli.Tetris;
 
 public class Muodostelma {
     private Muoto muoto;
     private ArrayList<Palikka> palikat;
     public boolean putoaa;
+    private Tetris peli;
     
-    public Muodostelma(Muoto muoto){
+    public Muodostelma(Muoto muoto, Tetris peli){
         this.palikat = new ArrayList<Palikka>();
         this.muoto = muoto;
         this.putoaa = true;
+        this.peli = peli;
         luoPalikat();
     }
     
@@ -70,6 +73,7 @@ public class Muodostelma {
         for (Palikka palikka : palikat) {
             palikka.putoa();
         }
+        tormays();
     }
     
     //siirretään koko muodostelmaa joko yhden ruudun verran vasemmalle (-1) tai oikealle (1)
@@ -100,9 +104,13 @@ public class Muodostelma {
     }
     
     // jos muodostelma osuu johonkin, se lakkaa putoamasta
-    public void tormays(ArrayList<Palikka> peliPalikat){
+    public void tormays(){
+        this.tormays(peli.getPalikat());
+    }
+    
+    public void tormays(List<Palikka> palikkalista){
         for (Palikka palikka : palikat) {
-            if(palikka.tormaa(peliPalikat)){
+            if(palikka.tormaa(palikkalista)){
                 this.putoaa=false;
                 return;
             }

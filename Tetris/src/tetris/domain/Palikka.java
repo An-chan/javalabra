@@ -1,5 +1,7 @@
 package tetris.domain;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.List;
 
 public class Palikka {
@@ -58,6 +60,14 @@ public class Palikka {
     // muodostelman kiertämistä varten tarkoitettu metodi
     public void siirraKierrossa(int yMuutos, int xMuutos){
         
+    }
+    
+    // piirretään oliot
+    public void piirra(Graphics g){
+        g.setColor(Color.white);
+        g.fillRect(x*20, y*20, 20, 20);
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawRect(x*20, y*20, 20, 20);
     }
     
 }

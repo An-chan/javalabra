@@ -14,6 +14,6 @@ public class Main {
         SwingUtilities.invokeLater(kayttoliittyma);
         kayttoliittyma.run();
         tetris.setAlusta(kayttoliittyma.getAlusta());
-        tetris.pelaa();
+        tetris.start();
     }
 }

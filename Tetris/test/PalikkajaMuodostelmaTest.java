@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import tetris.domain.*;
 import tetris.Main;
+import tetris.peli.Tetris;
 
 
 public class PalikkajaMuodostelmaTest {
@@ -14,10 +15,12 @@ public class PalikkajaMuodostelmaTest {
     }
     
     Palikka eka;
+    Tetris peli;
     
     @Before
     public void setUp() {
         eka = new Palikka(2, 3);
+        peli = new Tetris();
     }
     
     @After
@@ -46,7 +49,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void muodostelmaLuodaanOikeinTest(){
-        Muodostelma muod = new Muodostelma(Muoto.I);
+        Muodostelma muod = new Muodostelma(Muoto.I, peli);
         List<Palikka> palikat = muod.getPalikat();
         assertEquals(palikat.get(0).getX(), 0);
         assertEquals(palikat.get(0).getY(), 3);
@@ -60,7 +63,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void nelioMuodostelmaPutoaaOikeinTest(){
-        Muodostelma nelio = new Muodostelma(Muoto.nelio);
+        Muodostelma nelio = new Muodostelma(Muoto.nelio, peli);
         nelio.putoa();
         List<Palikka> palikat = nelio.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -75,7 +78,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void IMuodostelmaPutoaaOikeinTest(){
-        Muodostelma imuod = new Muodostelma(Muoto.I);
+        Muodostelma imuod = new Muodostelma(Muoto.I, peli);
         imuod.putoa();
         List<Palikka> palikat = imuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -90,7 +93,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void SMuodostelmaPutoaaOikeinTest(){
-        Muodostelma smuod = new Muodostelma(Muoto.S);
+        Muodostelma smuod = new Muodostelma(Muoto.S, peli);
         smuod.putoa();
         List<Palikka> palikat = smuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 2);
@@ -105,7 +108,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void peiliSMuodostelmaPutoaaOikeinTest(){
-        Muodostelma peilismuod = new Muodostelma(Muoto.peiliS);
+        Muodostelma peilismuod = new Muodostelma(Muoto.peiliS, peli);
         peilismuod.putoa();
         List<Palikka> palikat = peilismuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -120,7 +123,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void TMuodostelmaPutoaaOikeinTest(){
-        Muodostelma tmuod = new Muodostelma(Muoto.T);
+        Muodostelma tmuod = new Muodostelma(Muoto.T, peli);
         tmuod.putoa();
         List<Palikka> palikat = tmuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -135,7 +138,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void LMuodostelmaPutoaaOikeinTest(){
-        Muodostelma lmuod = new Muodostelma(Muoto.L);
+        Muodostelma lmuod = new Muodostelma(Muoto.L, peli);
         lmuod.putoa();
         List<Palikka> palikat = lmuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -150,7 +153,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void peiliLMuodostelmaPutoaaOikeinTest(){
-        Muodostelma peililmuod = new Muodostelma(Muoto.peiliL);
+        Muodostelma peililmuod = new Muodostelma(Muoto.peiliL, peli);
         peililmuod.putoa();
         List<Palikka> palikat = peililmuod.getPalikat();
         assertEquals(palikat.get(0).getX(), 1);
@@ -165,7 +168,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void siirretaanVasemmalleTest(){
-        Muodostelma muod = new Muodostelma(Muoto.nelio);
+        Muodostelma muod = new Muodostelma(Muoto.nelio, peli);
         muod.siirra(-1);
         List<Palikka> palikat = muod.getPalikat();
         assertEquals(palikat.get(0).getX(), 0);
@@ -180,7 +183,7 @@ public class PalikkajaMuodostelmaTest {
     
     @Test
     public void siirretaanOikealleTest(){
-        Muodostelma muod = new Muodostelma(Muoto.nelio);
+        Muodostelma muod = new Muodostelma(Muoto.nelio, peli);
         muod.siirra(1);
         List<Palikka> palikat = muod.getPalikat();
         assertEquals(palikat.get(0).getX(), 0);
@@ -195,7 +198,7 @@ public class PalikkajaMuodostelmaTest {
         
     @Test
     public void muodostelmaTormaaOikeinTest(){
-        Muodostelma muod = new Muodostelma(Muoto.T);
+        Muodostelma muod = new Muodostelma(Muoto.T, peli);
         Palikka testi = new Palikka(3, 4);
         ArrayList<Palikka> palikat = new ArrayList<Palikka>();
         palikat.add(testi);

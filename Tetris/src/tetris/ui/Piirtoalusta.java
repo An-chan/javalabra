@@ -8,20 +8,15 @@ import tetris.domain.*;
 import tetris.peli.Tetris;
 
 public class Piirtoalusta extends JPanel{
-    private Muodostelma putoava;
-    private List<Palikka> palikat;
     private Tetris peli;
     
     public Piirtoalusta(Tetris peli){
         this.peli = peli;
-        haePutoava();
-        this.palikat = peli.getPalikat();
-        this.addKeyListener(new NappisKuuntelija(peli));
         super.setBackground(Color.GRAY);
     }
     
-    public void haePutoava(){
-        this.putoava = peli.getPutoava();
+    public Muodostelma haePutoava(){
+        return peli.getPutoava();
     }
     
     @Override
@@ -34,16 +29,10 @@ public class Piirtoalusta extends JPanel{
     public void paint(Graphics g){
         super.paint(g);
         for (Palikka palikka : peli.getPalikat()){
-            g.setColor(Color.WHITE);
-            g.fillRect(palikka.getX()*20, palikka.getY()*20, 20, 20);
-            g.setColor(Color.LIGHT_GRAY);
-            g.drawRect(palikka.getX()*20, palikka.getY()*20, 20, 20);
+            palikka.piirra(g);
         }
         for (Palikka palikka : peli.getPutoava().getPalikat()){
-            g.setColor(Color.WHITE);
-            g.fillRect(palikka.getX()*20, palikka.getY()*20, 20, 20);
-            g.setColor(Color.LIGHT_GRAY);
-            g.drawRect(palikka.getX()*20, palikka.getY()*20, 20, 20);
+            palikka.piirra(g);
         }
     }
 
