@@ -7,10 +7,7 @@ import java.util.List;
 public class Muodostelma {
     private Muoto muoto;
     private ArrayList<Palikka> palikat;
-    private boolean putoaa;
-    // Nämä ehkä tarpeettomia?
-    private int x;
-    private int y;
+    public boolean putoaa;
     
     public Muodostelma(Muoto muoto){
         this.palikat = new ArrayList<Palikka>();
@@ -65,7 +62,6 @@ public class Muodostelma {
                 palikat.add(new Palikka(0, 6));
                 palikat.add(new Palikka(1, 5));
                 break;
-        
         }
     }
     
@@ -83,11 +79,37 @@ public class Muodostelma {
         }
     }
     
-    public void tormays(){
-        
+    // palikkaa kierretään aina oikealle, koska tämä on nyt old school -versio :D
+    public void kierra(){
+        switch (this.muoto){
+            case nelio:
+                return;            
+            case I:
+                
+            case L:
+                
+            case peiliL:
+                
+            case S:
+                
+            case peiliS:
+                
+            case T:
+                
+        }
     }
     
-    public List getPalikat(){
+    // jos muodostelma osuu johonkin, se lakkaa putoamasta
+    public void tormays(ArrayList<Palikka> peliPalikat){
+        for (Palikka palikka : palikat) {
+            if(palikka.tormaa(peliPalikat)){
+                this.putoaa=false;
+                return;
+            }
+        }
+    }
+    
+    public List<Palikka> getPalikat(){
         return this.palikat;
     }
 

@@ -55,4 +55,9 @@ public class Palikka {
         }
     }
     
+    // muodostelman kiertämistä varten tarkoitettu metodi
+    public void siirraKierrossa(int yMuutos, int xMuutos){
+        
+    }
+    
 }

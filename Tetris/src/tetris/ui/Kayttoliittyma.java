@@ -4,12 +4,16 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import tetris.peli.Tetris;
 
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
+    private Tetris peli;
+    private Piirtoalusta alusta;
 
-    public Kayttoliittyma() {
+    public Kayttoliittyma(Tetris peli) {
+        this.peli = peli;
     }
 
     @Override
@@ -26,10 +30,16 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        
+        Piirtoalusta pelialue = new Piirtoalusta(peli);
+        this.alusta = pelialue;
+        container.add(pelialue);
     }
 
     public JFrame getFrame() {
         return frame;
+    }
+    
+    public Piirtoalusta getAlusta(){
+        return this.alusta;
     }
 }

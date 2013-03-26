@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -7,9 +8,9 @@ import tetris.domain.*;
 import tetris.Main;
 
 
-public class TetrisTest {
+public class PalikkajaMuodostelmaTest {
     
-    public TetrisTest() {
+    public PalikkajaMuodostelmaTest() {
     }
     
     Palikka eka;
@@ -160,6 +161,50 @@ public class TetrisTest {
         assertEquals(palikat.get(2).getY(), 6);
         assertEquals(palikat.get(3).getX(), 2);
         assertEquals(palikat.get(3).getY(), 6);
+    }
+    
+    @Test
+    public void siirretaanVasemmalleTest(){
+        Muodostelma muod = new Muodostelma(Muoto.nelio);
+        muod.siirra(-1);
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 3);
+        assertEquals(palikat.get(1).getX(), 0);
+        assertEquals(palikat.get(1).getY(), 4);
+        assertEquals(palikat.get(2).getX(), 1);
+        assertEquals(palikat.get(2).getY(), 3);
+        assertEquals(palikat.get(3).getX(), 1);
+        assertEquals(palikat.get(3).getY(), 4);
+    }
+    
+    @Test
+    public void siirretaanOikealleTest(){
+        Muodostelma muod = new Muodostelma(Muoto.nelio);
+        muod.siirra(1);
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 5);
+        assertEquals(palikat.get(1).getX(), 0);
+        assertEquals(palikat.get(1).getY(), 6);
+        assertEquals(palikat.get(2).getX(), 1);
+        assertEquals(palikat.get(2).getY(), 5);
+        assertEquals(palikat.get(3).getX(), 1);
+        assertEquals(palikat.get(3).getY(), 6);
+    }
+        
+    @Test
+    public void muodostelmaTormaaOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.T);
+        Palikka testi = new Palikka(3, 4);
+        ArrayList<Palikka> palikat = new ArrayList<Palikka>();
+        palikat.add(testi);
+        muod.putoa();
+        muod.tormays(palikat);
+        assertEquals(muod.putoaa, true);
+        muod.putoa();
+        muod.tormays(palikat);
+        assertEquals(muod.putoaa, false);
     }
 
 }
