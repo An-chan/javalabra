@@ -34,7 +34,12 @@ public class Tetris extends Timer implements ActionListener{
         super.setInitialDelay(2000);
     }
     
-    // luodaan uusi sattumanvarainen muodostelma putoavaksi muodostelmaksi
+    /**
+     * Metodi luo uuden muodostelman putoavaksi muodostelmaksi
+     * ja antaa sille satunnaisen muodon.
+     * 
+     * Ei palauta mitään, vaan asettaa tuloksen this.putoava.
+     */
     public void luoUusiPutoava(){
         Random rand = new Random();
         int satun = rand.nextInt(7);
@@ -78,7 +83,10 @@ public class Tetris extends Timer implements ActionListener{
         }
     }
     
-    // laitetaan peli paussille ja lopetetaan paussi
+    /**
+     * Metodi pysäyttää pelin tilapäisesti tai
+     * palauttaa sen pysäytystilasta.
+     */
     public void pausePaallePois(){
         if (this.pause){
             this.pause = false;
@@ -101,7 +109,12 @@ public class Tetris extends Timer implements ActionListener{
         
     }
     
-    // palautetaan kaikki pelissä olevat palikat - HUOM! ei putoavia! -
+    /**
+     * Metodi palauttaa listan kaikista pelissä olevista palikoista,
+     * paitsi senhetkisen putoavan mukaikissaodostelman palikat.
+     * 
+     * @return List<Palikka>, lista jolla kaikki pelin palikat
+     */
     public List<Palikka> getPalikat(){
         List<Palikka> palautuva = new ArrayList<Palikka>();
         for (int i = 0; i < pelipalikat.length; i++){

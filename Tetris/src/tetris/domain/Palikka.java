@@ -15,7 +15,13 @@ public class Palikka {
         this.y = y;
     }
     
-    // Metodi tarkastaa, onko suoraan palikan alla toinen palikka, joka estää putoamisen
+    /**
+     * Metodi tarkastaa, onko suoraan palikan alla toinen palikka
+     * johon se törmää eikä voi enää liikkua.
+     * 
+     * @param toinen: palikka, johon törmäämistä tutkitaan
+     * @return boolean: kertoo, törmääkö palikka vai ei
+     */
     public boolean tormaa(Palikka toinen){
         if (toinen.getY() == this.y){
             if (toinen.getX() == this.x +1){
@@ -25,7 +31,12 @@ public class Palikka {
         return false;
     }
     
-    // Sama kuin edellinen, mutta listalle palikoita
+    /**
+     * Metodi, joka testaa törmäämistä listaan palikoita
+     * 
+     * @param lista: palikat, joihin törmäämistä tutkitaan
+     * @return boolean: kertoo, törmääkö palikka vai ei
+     */
     public boolean tormaa(List<Palikka> lista){
         for (Palikka palikka : lista) {
             if (this.tormaa(palikka)){
@@ -50,16 +61,28 @@ public class Palikka {
         this.x++;
     }
     
-    // Palikkaa siirretään joko yksi ruutu oikealle (+1) tai vasemmalle (-1)
+    /**
+     * Metodi siirtää palikkaa joko yhden ruudun verran oikealle tai
+     * yhden ruudun verran vasemmalle.
+     * 
+     * @param yMuutos: joko 1 (siirrytään oikealle) tai -1 (siirrytään vasemmalle)
+     */
     public void siirra(int yMuutos){
         if (this.y + yMuutos > 0 && this.y + yMuutos <= 10){
             this.y = this.y + yMuutos;
         }
     }
     
-    // muodostelman kiertämistä varten tarkoitettu metodi
-    public void siirraKierrossa(int yMuutos, int xMuutos){
-        
+    /**
+     * Metodi siirtää palikoita muodostelmien kierrossa ja
+     * vaikuttaa siksi sekä y- että x-sijaintiin.
+     * 
+     * @param xMuutos x-koordinaatin muutos
+     * @param yMuutos y-koordinaatin muutos
+     */
+    public void siirraKierrossa(int xMuutos, int yMuutos){
+        this.x = this.x + xMuutos;
+        this.y = this.y + yMuutos;
     }
     
     // piirretään oliot

@@ -68,7 +68,9 @@ public class Muodostelma {
         }
     }
     
-    // pudotetaan palikkamuodostelmaa yksi ruutu alaspäin
+    /**
+     * Palikkamuodostelmaa siirretään yhden ruudun verran alaspäin.
+     */
     public void putoa(){
         for (Palikka palikka : palikat) {
             palikka.putoa();
@@ -76,30 +78,52 @@ public class Muodostelma {
         tormays();
     }
     
-    //siirretään koko muodostelmaa joko yhden ruudun verran vasemmalle (-1) tai oikealle (1)
+    /**
+     * Metodi siirtää palikkaa joko oikealle tai vasemmalle
+     * annetun syötteen mukaisesti, kuitenkin vain ruutu kerrallaan.
+     * 
+     * @param ymuutos sijainnin muutos, 1 jos siirrytään oikealle, -1 vasemmalle
+     */
     public void siirra(int ymuutos){
         for (Palikka palikka : palikat){
             palikka.siirra(ymuutos);
         }
     }
     
-    // palikkaa kierretään aina oikealle, koska tämä on nyt old school -versio :D
+    /** 
+     *  Palikkaa kierretään aina oikealle, käyttäen palikkaa nro 1 
+     *  (eli toista palikkaa) keskipisteenä.
+     * 
+     * Huom! I-muodostelman kiertoa ei vielä implementoitu.
+     * */
     public void kierra(){
-        switch (this.muoto){
-            case nelio:
-                return;            
-            case I:
-                
-            case L:
-                
-            case peiliL:
-                
-            case S:
-                
-            case peiliS:
-                
-            case T:
-                
+        int keskiY = palikat.get(1).getY();
+        int keskiX = palikat.get(1).getX();
+        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiY +1 > 10){
+            return;
+        }
+        for (int i = 0; i < palikat.size(); i++){
+            if (i == 1){
+                continue;
+            }
+            Palikka tama = palikat.get(i);
+            if (tama.getX() == keskiX-1 && tama.getY() == keskiY){         //keskikohdan yläpuolella
+                tama.siirraKierrossa(1, 1);
+            } else if (tama.getX() == keskiX+1 && tama.getY() == keskiY){ //keskikohdan alapuolella
+                tama.siirraKierrossa(-1, -1);
+            } else if (tama.getX() == keskiX && tama.getY() == keskiY+1){ //keskikohdan oikealla
+                tama.siirraKierrossa(1, -1);
+            } else if (tama.getX() == keskiX && tama.getY() == keskiY-1){ //keskikohdan vasemmalla
+                tama.siirraKierrossa(-1, 1);
+            } else if (tama.getX() == keskiX-1 && tama.getY() == keskiY+1){ //keskikohdan yläoikealla
+                tama.siirraKierrossa(0, 2);
+            }  else if (tama.getX() == keskiX-1 && tama.getY() == keskiY-1){ //keskikohdan ylävasemmalla
+                tama.siirraKierrossa(2, 0);
+            }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY+1){ //keskikohdan alaoikealla
+                tama.siirraKierrossa(0, -2);
+            }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY-1){ //keskikohdan alavasemmalla
+                tama.siirraKierrossa(-2, 0);
+            }
         }
     }
     

@@ -209,5 +209,105 @@ public class PalikkajaMuodostelmaTest {
         muod.tormays(palikat);
         assertEquals(muod.putoaa, false);
     }
+    
+    @Test
+    public void LmuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.L, peli);
+        muod.putoa();
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 5);
+        assertEquals(palikat.get(1).getX(), 1);
+        assertEquals(palikat.get(1).getY(), 5);
+        assertEquals(palikat.get(2).getX(), 2);
+        assertEquals(palikat.get(2).getY(), 5);
+        assertEquals(palikat.get(3).getX(), 0);
+        assertEquals(palikat.get(3).getY(), 4);
+    }
+    
+    @Test
+    public void peiliLmuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.peiliL, peli);
+        muod.putoa();
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 5);
+        assertEquals(palikat.get(1).getX(), 1);
+        assertEquals(palikat.get(1).getY(), 5);
+        assertEquals(palikat.get(2).getX(), 2);
+        assertEquals(palikat.get(2).getY(), 5);
+        assertEquals(palikat.get(3).getX(), 2);
+        assertEquals(palikat.get(3).getY(), 4);
+    }
+    
+    @Test
+    public void TmuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.T, peli);
+        muod.putoa();
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 5);
+        assertEquals(palikat.get(1).getX(), 1);
+        assertEquals(palikat.get(1).getY(), 5);
+        assertEquals(palikat.get(2).getX(), 2);
+        assertEquals(palikat.get(2).getY(), 5);
+        assertEquals(palikat.get(3).getX(), 1);
+        assertEquals(palikat.get(3).getY(), 4);
+    }
+    
+    @Test
+    public void SmuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.S, peli);
+        muod.putoa();
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 4);
+        assertEquals(palikat.get(1).getX(), 1);
+        assertEquals(palikat.get(1).getY(), 5);
+        assertEquals(palikat.get(2).getX(), 2);
+        assertEquals(palikat.get(2).getY(), 5);
+        assertEquals(palikat.get(3).getX(), 1);
+        assertEquals(palikat.get(3).getY(), 4);
+    }
+    
+    @Test
+    public void peiliSmuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.peiliS, peli);
+        muod.putoa();
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 4);
+        assertEquals(palikat.get(1).getX(), 1);
+        assertEquals(palikat.get(1).getY(), 4);
+        assertEquals(palikat.get(2).getX(), 1);
+        assertEquals(palikat.get(2).getY(), 3);
+        assertEquals(palikat.get(3).getX(), 2);
+        assertEquals(palikat.get(3).getY(), 3);
+    }
+    
+    @Test
+    public void nelioMuodostelmaKiertyyOikeinTest(){
+        Muodostelma muod = new Muodostelma(Muoto.nelio, peli);
+        muod.kierra();
+        List<Palikka> palikat = muod.getPalikat();
+        assertEquals(palikat.get(0).getX(), 0);
+        assertEquals(palikat.get(0).getY(), 4);
+        assertEquals(palikat.get(1).getX(), 0);
+        assertEquals(palikat.get(1).getY(), 5);
+        assertEquals(palikat.get(2).getX(), 1);
+        assertEquals(palikat.get(2).getY(), 4);
+        assertEquals(palikat.get(3).getX(), 1);
+        assertEquals(palikat.get(3).getY(), 5);
+    }
+    
+//    @Test
+//    public void ImuodostelmaKiertyyOikeinTest(){
+//        
+//    }
 
 }
