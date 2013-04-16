@@ -4,6 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
+/**
+ * @author Anni Perheentupa
+ * 
+ * Tämä luokka käsittelee pelin Palikka-olioiden ominaisuuksia ja toimintoja,
+ * kuten niiden siirtämistä ja törmäämistä. Muodostelmille on oma luokkansa.
+ * 
+ * @see Muodostelma
+ */
+
 public class Palikka {
     private int leveys = 10;
     private int korkeus = 10;
@@ -85,12 +94,16 @@ public class Palikka {
         this.y = this.y + yMuutos;
     }
     
-    // piirretään oliot
+    /**
+     * Metodi piirtää olion kuvaaman palikan piirtoalustalle.
+     * 
+     * @param g Graphics-luokan ilmentymä
+     */
     public void piirra(Graphics g){
         g.setColor(Color.white);
-        g.fillRect(x*20, y*20, 20, 20);
+        g.fillRect(y*20, x*20, 20, 20);
         g.setColor(Color.LIGHT_GRAY);
-        g.drawRect(x*20, y*20, 20, 20);
+        g.drawRect(y*20, x*20, 20, 20);
     }
     
 }

@@ -4,7 +4,15 @@ package tetris.domain;
 import java.util.ArrayList;
 import java.util.List;
 import tetris.peli.Tetris;
-
+/**
+ * @author Anni Perheentupa
+ * 
+ * Tämä luokka käsittelee Palikka-olioista muodostuvia muodostelmia ja
+ * suorittaa niille yhteisiä operaatioita, kuten siirtämisen, kiertämisen
+ * ja putoamisen.
+ * 
+ * @see Palikka
+ */
 public class Muodostelma {
     private Muoto muoto;
     private ArrayList<Palikka> palikat;

@@ -10,6 +10,13 @@ import javax.swing.Timer;
 import tetris.domain.*;
 import tetris.ui.*;
 
+/**
+ * @author Anni
+ * 
+ * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä olevista
+ * palikoista (sekä putoava muodostelma että jo kasatut palikat).
+ */
+
 public class Tetris extends Timer implements ActionListener{
     private final int LEVEYS = 200;
     private final int KORKEUS = 400;
@@ -46,18 +53,25 @@ public class Tetris extends Timer implements ActionListener{
         switch (satun){
             case 0:
                 this.putoava = new Muodostelma(Muoto.I, this);
+                break;
             case 1:
                 this.putoava = new Muodostelma(Muoto.S, this);
+                break;
             case 2:
                 this.putoava = new Muodostelma(Muoto.peiliS, this);
+                break;
             case 3:
                 this.putoava = new Muodostelma(Muoto.L, this);
+                break;
             case 4:
                 this.putoava = new Muodostelma(Muoto.peiliL, this);
+                break;
             case 5:
                 this.putoava = new Muodostelma(Muoto.T, this);
+                break;
             case 6:
                 this.putoava = new Muodostelma(Muoto.nelio, this);
+                break;
         }
     }
     
@@ -67,7 +81,7 @@ public class Tetris extends Timer implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        while (jatkuu){
+//        while (jatkuu){
             this.putoava.putoa();
             if (!putoava.putoaa){ // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
                 for (Palikka palikka : putoava.getPalikat()){
@@ -80,7 +94,7 @@ public class Tetris extends Timer implements ActionListener{
             }
             // jos palikkapino kasvaa kattoon asti, jatkuu = false
             this.pelialue.repaint();           
-        }
+//        }
     }
     
     /**

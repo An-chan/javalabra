@@ -34,7 +34,7 @@ public class Kayttoliittyma implements Runnable {
         this.alusta = pelialue;
         container.add(pelialue);
         
-        frame.addKeyListener(new NappisKuuntelija(peli));
+        frame.addKeyListener(new Nappiskuuntelija(peli));
     }
 
     public JFrame getFrame() {

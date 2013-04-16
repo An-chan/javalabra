@@ -20,12 +20,6 @@ public class Piirtoalusta extends JPanel{
     }
     
     @Override
-    public void repaint(){
-        super.repaint();
-        requestFocus();
-    }
-    
-    @Override
     public void paint(Graphics g){
         super.paint(g);
         for (Palikka palikka : peli.getPalikat()){

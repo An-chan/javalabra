@@ -4,10 +4,20 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import tetris.peli.Tetris;
 
-public class NappisKuuntelija extends KeyAdapter {
+/**
+ * @author Anni
+ * 
+ * Näppiskuuntelija-luokka vastaanottaa käyttäjän syöttämät näppäinkomennot ja
+ * tulkitsee ne ohjelman sisäisiksi toiminnoiksi. Se kommunikoi Tetris-luokan kanssa,
+ * mutta käyttää oikeastaan lähinnä Muodostelmasta löytyviä metodeita.
+ * 
+ * @see Muodostelma
+ */
+
+public class Nappiskuuntelija extends KeyAdapter {
     private Tetris peli;
     
-    public NappisKuuntelija(Tetris tetris){
+    public Nappiskuuntelija(Tetris tetris){
         this.peli = tetris;
     }
     
@@ -22,16 +32,23 @@ public class NappisKuuntelija extends KeyAdapter {
              switch (keycode) {
              case KeyEvent.VK_LEFT:
                  peli.getPutoava().siirra(-1);
+                 break;
              case KeyEvent.VK_RIGHT:
                  peli.getPutoava().siirra(1);
+                 break;
              case KeyEvent.VK_DOWN:
                  peli.getPutoava().putoa();
+                 break;
              case KeyEvent.VK_UP:
                  peli.getPutoava().kierra();
+                 break;
              case KeyEvent.VK_SPACE:
                  // pudotetaan muodostelma välittömästi?
+                 break;
+             case KeyEvent.VK_P:
+                 peli.pausePaallePois();
+                 break;
              }
-             peli.getAlusta().repaint();
 
          }
      }
