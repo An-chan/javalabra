@@ -107,6 +107,9 @@ public class Muodostelma {
     public void kierra(){
         int keskiY = palikat.get(1).getY();
         int keskiX = palikat.get(1).getX();
+        if (this.muoto == Muoto.nelio){
+            return;             // nelio-muodostelma on aina samanlainen
+        }
         if (keskiX-1 < 0 || keskiY-1 < 0 || keskiY +1 > 10){
             return;
         }

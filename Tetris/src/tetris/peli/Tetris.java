@@ -82,6 +82,9 @@ public class Tetris extends Timer implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
 //        while (jatkuu){
+            if (pause){
+                
+            }
             this.putoava.putoa();
             if (!putoava.putoaa){ // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
                 for (Palikka palikka : putoava.getPalikat()){
@@ -89,7 +92,7 @@ public class Tetris extends Timer implements ActionListener{
                 }
                 luoUusiPutoava(); // luodaan uusi putoava muodostelma
             }
-            if (tarkastaTaydetRivit()){ //tarkastetaan tuliko rivejä täyteen
+            if (tarkastaTaydetRivit() != 0){ //tarkastetaan tuliko rivejä täyteen
                 poistaTaydetRivit();
             }
             // jos palikkapino kasvaa kattoon asti, jatkuu = false
@@ -113,13 +116,28 @@ public class Tetris extends Timer implements ActionListener{
         return this.pause;
     }
     
-    // KESKEN: metodi tarkastaa onko jokin rivi tullut täyteen
-    public boolean tarkastaTaydetRivit(){
-        return false;
+    /**
+     * Metodi tarkastaa, onko jokin pelissä olevien palikoiden riveistä tullut täyteen
+     * @return boolean true, jos jokin rivi on täynnä, false jos ei
+     */
+    public int tarkastaTaydetRivit(){
+        int palautuva = 0;
+        for(int i = 0; i < pelipalikat.length; i++){
+            if (pelipalikat[i][0] != null){
+                for (int j = 0; j < pelipalikat[i].length; j++){
+                    if (pelipalikat[i][j] == null){
+                        break;
+                    }
+                }
+                palautuva++;
+            }
+        }
+        return palautuva;
     }
     
     //KESKEN: metodi poistaa täydet rivit, tuo niiden yläpuoliset rivit alas, ja antaa pelaajalle pisteet
     public void poistaTaydetRivit(){
+        this.pisteet += 100;
         
     }
     

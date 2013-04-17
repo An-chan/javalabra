@@ -36,6 +36,8 @@ public class Palikka {
             if (toinen.getX() == this.x +1){
                 return true;
             }
+        } else if (this.x == 19){
+            return true;
         }
         return false;
     }
