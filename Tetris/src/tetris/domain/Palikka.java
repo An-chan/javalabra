@@ -36,8 +36,6 @@ public class Palikka {
             if (toinen.getX() == this.x +1){
                 return true;
             }
-        } else if (this.x == 19){
-            return true;
         }
         return false;
     }
@@ -53,6 +51,9 @@ public class Palikka {
             if (this.tormaa(palikka)){
                 return true;
             }
+        }
+        if (this.x >= 19){
+            return true;
         }
         return false;
     }
@@ -79,7 +80,7 @@ public class Palikka {
      * @param yMuutos: joko 1 (siirrytään oikealle) tai -1 (siirrytään vasemmalle)
      */
     public void siirra(int yMuutos){
-        if (this.y + yMuutos > 0 && this.y + yMuutos <= 10){
+        if (this.y + yMuutos >= 0 && this.y + yMuutos < 10){
             this.y = this.y + yMuutos;
         }
     }
