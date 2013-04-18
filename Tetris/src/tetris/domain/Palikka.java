@@ -16,12 +16,12 @@ import java.util.List;
 public class Palikka {
     private int leveys = 10;
     private int korkeus = 10;
-    private int x;
     private int y;
+    private int x;
     
     public Palikka(int x, int y){
-        this.x = x;
         this.y = y;
+        this.x = x;
     }
     
     /**
@@ -32,8 +32,8 @@ public class Palikka {
      * @return boolean: kertoo, törmääkö palikka vai ei
      */
     public boolean tormaa(Palikka toinen){
-        if (toinen.getY() == this.y){
-            if (toinen.getX() == this.x +1){
+        if (toinen.getX() == this.x){
+            if (toinen.getY() == this.y +1){
                 return true;
             }
         }
@@ -52,36 +52,37 @@ public class Palikka {
                 return true;
             }
         }
-        if (this.x >= 19){
+        if (this.y >= 19){
             return true;
         }
         return false;
     }
     
-    // Palauttaa x-sijainnin
-    public int getX(){
-        return this.x;
-    }
-    
-    // Palauttaa y-sijainnin
     public int getY(){
         return this.y;
     }
     
-    // Palikka putoaa yhden ruudun alaspäin
+    public int getX(){
+        return this.x;
+    }
+    
+    /**
+     * Metodi "pudottaa" palikan, eli siirtää sitä yhden ruudun alaspäin.
+     * 
+     */
     public void putoa(){
-        this.x++;
+        this.y++;
     }
     
     /**
      * Metodi siirtää palikkaa joko yhden ruudun verran oikealle tai
      * yhden ruudun verran vasemmalle.
      * 
-     * @param yMuutos: joko 1 (siirrytään oikealle) tai -1 (siirrytään vasemmalle)
+     * @param xMuutos: joko 1 (siirrytään oikealle) tai -1 (siirrytään vasemmalle)
      */
-    public void siirra(int yMuutos){
-        if (this.y + yMuutos >= 0 && this.y + yMuutos < 10){
-            this.y = this.y + yMuutos;
+    public void siirra(int xMuutos){
+        if (this.x + xMuutos >= 0 && this.x + xMuutos < 10){
+            this.x = this.x + xMuutos;
         }
     }
     
@@ -93,8 +94,8 @@ public class Palikka {
      * @param yMuutos y-koordinaatin muutos
      */
     public void siirraKierrossa(int xMuutos, int yMuutos){
-        this.x = this.x + xMuutos;
         this.y = this.y + yMuutos;
+        this.x = this.x + xMuutos;
     }
     
     /**
@@ -104,9 +105,9 @@ public class Palikka {
      */
     public void piirra(Graphics g){
         g.setColor(Color.white);
-        g.fillRect(y*20, x*20, 20, 20);
+        g.fillRect(x*20, y*20, 20, 20);
         g.setColor(Color.LIGHT_GRAY);
-        g.drawRect(y*20, x*20, 20, 20);
+        g.drawRect(x*20, y*20, 20, 20);
     }
     
 }

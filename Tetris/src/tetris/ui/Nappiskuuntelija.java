@@ -37,8 +37,10 @@ public class Nappiskuuntelija extends KeyAdapter {
                  peli.getPutoava().siirra(1);
                  break;
              case KeyEvent.VK_DOWN:
-                 
-                 peli.getPutoava().putoa();
+                 peli.getPutoava().tormays();
+                 if (peli.getPutoava().putoaa){
+                     peli.getPutoava().putoa();
+                 }
                  break;
              case KeyEvent.VK_UP:
                  peli.getPutoava().kierra();

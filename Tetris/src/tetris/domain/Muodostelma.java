@@ -32,46 +32,46 @@ public class Muodostelma {
         // x-koordinaatti kasvaa alaspäin, y-koordinaatti kasvaa oikealle
         switch (muoto){
             case I:
-                palikat.add(new Palikka(0, 3));
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
+                palikat.add(new Palikka(3, 0));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(6, 0));
                 break;
             case L:
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
-                palikat.add(new Palikka(1, 4));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(6, 0));
+                palikat.add(new Palikka(4, 1));
                 break;
             case peiliL:
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
-                palikat.add(new Palikka(1, 6));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(6, 0));
+                palikat.add(new Palikka(6, 1));
                 break;
             case nelio:
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(1, 4));
-                palikat.add(new Palikka(1, 5));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(4, 1));
+                palikat.add(new Palikka(5, 1));
                 break;
             case S:
-                palikat.add(new Palikka(1, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
-                palikat.add(new Palikka(1, 5));
+                palikat.add(new Palikka(4, 1));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(6, 0));
+                palikat.add(new Palikka(5, 1));
                 break;
             case peiliS:
-                palikat.add(new Palikka(0, 3));
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(1, 4));
-                palikat.add(new Palikka(1, 5));
+                palikat.add(new Palikka(3, 0));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(4, 1));
+                palikat.add(new Palikka(5, 1));
                 break;
             case T:
-                palikat.add(new Palikka(0, 4));
-                palikat.add(new Palikka(0, 5));
-                palikat.add(new Palikka(0, 6));
-                palikat.add(new Palikka(1, 5));
+                palikat.add(new Palikka(4, 0));
+                palikat.add(new Palikka(5, 0));
+                palikat.add(new Palikka(6, 0));
+                palikat.add(new Palikka(5, 1));
                 break;
         }
     }
@@ -112,12 +112,13 @@ public class Muodostelma {
             return;             // nelio-muodostelma on aina samanlainen
         }
         if (this.muoto == Muoto.I){
-            if (keskiX-2 < 0 || keskiY-2 < 0 || keskiY+2 > 10 || keskiX+2 > 19){
+            if (keskiX-1 < 0 || keskiY-1 < 0 || keskiY+2 > 19 || keskiX+2 > 10){
                 return;
             } 
-            Ikierto();
+            this.Ikierto();
+            return;
         }
-        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiY +1 > 10){
+        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiX +1 > 10 || keskiY+1 > 19){
             return;
         }
         for (int i = 0; i < palikat.size(); i++){
@@ -125,22 +126,22 @@ public class Muodostelma {
                 continue;
             }
             Palikka tama = palikat.get(i);
-            if (tama.getX() == keskiX-1 && tama.getY() == keskiY){         //keskikohdan yläpuolella
+            if (tama.getX() == keskiX && tama.getY() == keskiY-1){         //keskikohdan yläpuolella
                 tama.siirraKierrossa(1, 1);
-            } else if (tama.getX() == keskiX+1 && tama.getY() == keskiY){ //keskikohdan alapuolella
+            } else if (tama.getX() == keskiX && tama.getY() == keskiY+1){ //keskikohdan alapuolella
                 tama.siirraKierrossa(-1, -1);
-            } else if (tama.getX() == keskiX && tama.getY() == keskiY+1){ //keskikohdan oikealla
-                tama.siirraKierrossa(1, -1);
-            } else if (tama.getX() == keskiX && tama.getY() == keskiY-1){ //keskikohdan vasemmalla
+            } else if (tama.getX() == keskiX+1 && tama.getY() == keskiY){ //keskikohdan oikealla
                 tama.siirraKierrossa(-1, 1);
-            } else if (tama.getX() == keskiX-1 && tama.getY() == keskiY+1){ //keskikohdan yläoikealla
+            } else if (tama.getX() == keskiX-1 && tama.getY() == keskiY){ //keskikohdan vasemmalla
+                tama.siirraKierrossa(1, -1);
+            } else if (tama.getX() == keskiX+1 && tama.getY() == keskiY-1){ //keskikohdan yläoikealla
                 tama.siirraKierrossa(0, 2);
             }  else if (tama.getX() == keskiX-1 && tama.getY() == keskiY-1){ //keskikohdan ylävasemmalla
                 tama.siirraKierrossa(2, 0);
             }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY+1){ //keskikohdan alaoikealla
-                tama.siirraKierrossa(0, -2);
-            }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY-1){ //keskikohdan alavasemmalla
                 tama.siirraKierrossa(-2, 0);
+            }  else if (tama.getX() == keskiX-1 && tama.getY() == keskiY+1){ //keskikohdan alavasemmalla
+                tama.siirraKierrossa(0, -2);
             }
         }
     }
@@ -149,13 +150,13 @@ public class Muodostelma {
         int keskiY = palikat.get(1).getY();
         int keskiX = palikat.get(1).getX();
         if (palikat.get(0).getY() == keskiY){
-            palikat.get(0).siirraKierrossa(-1, 1);
-            palikat.get(2).siirraKierrossa(1, -1);
-            palikat.get(3).siirraKierrossa(2, -2);
-        } else if (palikat.get(0).getX() == keskiX) {
             palikat.get(0).siirraKierrossa(1, -1);
             palikat.get(2).siirraKierrossa(-1, 1);
             palikat.get(3).siirraKierrossa(-2, 2);
+        } else if (palikat.get(0).getX() == keskiX) {
+            palikat.get(0).siirraKierrossa(-1, 1);
+            palikat.get(2).siirraKierrossa(1, -1);
+            palikat.get(3).siirraKierrossa(2, -2);
         }
     }
     

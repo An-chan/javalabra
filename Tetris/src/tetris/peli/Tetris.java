@@ -88,13 +88,11 @@ public class Tetris extends Timer implements ActionListener{
             this.putoava.putoa();
             tulosta(putoava.getPalikat());
             if (!putoava.putoaa){ // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
-                for (Palikka palikka : putoava.getPalikat()){
-                    pelipalikat[palikka.getX()][palikka.getY()] = palikka;
-                }
+                lisaaPalikatPeliin(putoava.getPalikat());
                 luoUusiPutoava(); // luodaan uusi putoava muodostelma
             }
             List<Integer> tayttyneet = tarkastaTaydetRivit();
-            if (tayttyneet.size() > 0){ //tarkastetaan tuliko rivejä täyteen
+            if (tayttyneet != null){ //tarkastetaan tuliko rivejä täyteen
                 poistaTaydetRivit(tayttyneet);
             }
             // jos palikkapino kasvaa kattoon asti, jatkuu = false
@@ -119,25 +117,40 @@ public class Tetris extends Timer implements ActionListener{
     }
     
     /**
-     * Metodi tarkastaa, onko jokin pelissä olevien palikoiden riveistä tullut täyteen
-     * @return boolean true, jos jokin rivi on täynnä, false jos ei
+     * Metodi tarkastaa, onko jokin pelissä olevien palikoiden riveistä tullut täyteen,
+     * ja palauttaa täysien rivien numerot listana poistamista varten
+     * 
+     * @return List<Integer> lista poistettavista riveistä
      */
     public List<Integer> tarkastaTaydetRivit(){
         List<Integer> taydet = new ArrayList<Integer>();
-        for(int i = 0; i < pelipalikat.length; i++){
+        for (int i = pelipalikat.length-1; i >= 0; i--){
             if (pelipalikat[i][0] != null){
+                boolean taysi = true;
                 for (int j = 0; j < pelipalikat[i].length; j++){
                     if (pelipalikat[i][j] == null){
+                        taysi = false;
                         break;
                     }
                 }
-                taydet.add(i);
+                if(taysi){
+                    taydet.add(i);
+                }
             }
+        }
+        if (taydet.size() == 0){
+            return null;
         }
         return taydet;
     }
     
-    //KESKEN: metodi poistaa täydet rivit, tuo niiden yläpuoliset rivit alas, ja antaa pelaajalle pisteet
+    /**
+     * Metodi poistaa täyttyneet rivit pelistä ja laskee niiden yläpuolella
+     * olevia rivejä alas tarvittavan määrän.
+     * KESKEN!!
+     * 
+     * @param taydet lista poistettavista riveistä
+     */
     public void poistaTaydetRivit(List<Integer> taydet){
         for (Integer i : taydet) {
             pelipalikat[i] = new Palikka[10];
@@ -170,6 +183,17 @@ public class Tetris extends Timer implements ActionListener{
         return palautuva;
     }
     
+    /**
+     * Metodi lisää listana annetut palikat peliin oikeille paikoille.
+     * 
+     * @param palikat lista lisättävistä palikoista
+     */
+    public void lisaaPalikatPeliin(List<Palikka> palikat){
+        for (Palikka palikka : palikat){
+            pelipalikat[palikka.getY()][palikka.getX()] = palikka;
+        }
+    }
+    
     public Muodostelma getPutoava(){
         return this.putoava;
     }
@@ -177,6 +201,16 @@ public class Tetris extends Timer implements ActionListener{
     public Piirtoalusta getAlusta(){
         return this.pelialue;
     }
+    
+    public int getPisteet(){
+        return this.pisteet;
+    }
+    
+    /**
+     * Debuggaamiseen tarkoitettu metodi, joka tulostaa palikoiden koordinaatteja
+     * 
+     * @param palikat tulostettavat palikat
+     */
     public void tulosta(List<Palikka> palikat){
         System.out.println(putoava.putoaa);
         for (Palikka palikka : palikat) {
