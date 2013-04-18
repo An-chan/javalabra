@@ -141,8 +141,13 @@ public class Tetris extends Timer implements ActionListener{
     public void poistaTaydetRivit(List<Integer> taydet){
         for (Integer i : taydet) {
             pelipalikat[i] = new Palikka[10];
+            for (int x = i; x < pelipalikat.length-1; x++){
+                Palikka[] temp = pelipalikat[x-1];
+                pelipalikat[x-1] = pelipalikat[x];
+                pelipalikat[x]= temp;
+            }
         }
-        this.pisteet += 100;
+        this.pisteet += 100*taydet.size();
         super.setDelay(super.getDelay()-100);
         
     }

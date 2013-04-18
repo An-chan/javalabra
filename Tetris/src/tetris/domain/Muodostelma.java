@@ -87,8 +87,9 @@ public class Muodostelma {
     }
     
     /**
-     * Metodi siirtää palikkaa joko oikealle tai vasemmalle
+     * Metodi siirtää koko muodostelmaa joko oikealle tai vasemmalle
      * annetun syötteen mukaisesti, kuitenkin vain ruutu kerrallaan.
+     * HUOM! Seiniin törmäys vielä keskeneräisesti käsitelty!
      * 
      * @param ymuutos sijainnin muutos, 1 jos siirrytään oikealle, -1 vasemmalle
      */
@@ -99,16 +100,22 @@ public class Muodostelma {
     }
     
     /** 
-     *  Palikkaa kierretään aina oikealle, käyttäen palikkaa nro 1 
+     *  Muodostelmaa kierretään aina oikealle, käyttäen palikkaa nro 1 
      *  (eli toista palikkaa) keskipisteenä.
      * 
-     * Huom! I-muodostelman kiertoa ei vielä implementoitu.
+     * Huom! I-muodostelman kierto toistaiseksi rikki!
      * */
     public void kierra(){
         int keskiY = palikat.get(1).getY();
         int keskiX = palikat.get(1).getX();
         if (this.muoto == Muoto.nelio){
             return;             // nelio-muodostelma on aina samanlainen
+        }
+        if (this.muoto == Muoto.I){
+            if (keskiX-2 < 0 || keskiY-2 < 0 || keskiY+2 > 10 || keskiX+2 > 19){
+                return;
+            } 
+            Ikierto();
         }
         if (keskiX-1 < 0 || keskiY-1 < 0 || keskiY +1 > 10){
             return;
@@ -135,6 +142,20 @@ public class Muodostelma {
             }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY-1){ //keskikohdan alavasemmalla
                 tama.siirraKierrossa(-2, 0);
             }
+        }
+    }
+    
+    public void Ikierto(){
+        int keskiY = palikat.get(1).getY();
+        int keskiX = palikat.get(1).getX();
+        if (palikat.get(0).getY() == keskiY){
+            palikat.get(0).siirraKierrossa(-1, 1);
+            palikat.get(2).siirraKierrossa(1, -1);
+            palikat.get(3).siirraKierrossa(2, -2);
+        } else if (palikat.get(0).getX() == keskiX) {
+            palikat.get(0).siirraKierrossa(1, -1);
+            palikat.get(2).siirraKierrossa(-1, 1);
+            palikat.get(3).siirraKierrossa(-2, 2);
         }
     }
     

@@ -37,6 +37,7 @@ public class Nappiskuuntelija extends KeyAdapter {
                  peli.getPutoava().siirra(1);
                  break;
              case KeyEvent.VK_DOWN:
+                 
                  peli.getPutoava().putoa();
                  break;
              case KeyEvent.VK_UP:
@@ -49,6 +50,6 @@ public class Nappiskuuntelija extends KeyAdapter {
                  peli.pausePaallePois();
                  break;
              }
-
+             peli.getAlusta().repaint();
          }
      }
