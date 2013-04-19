@@ -1,4 +1,3 @@
-
 package tetris;
 
 import javax.swing.SwingUtilities;
@@ -8,12 +7,11 @@ import tetris.ui.Kayttoliittyma;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        
         Tetris tetris = new Tetris();
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(tetris);
         SwingUtilities.invokeLater(kayttoliittyma);
-        kayttoliittyma.run();
-        tetris.setAlusta(kayttoliittyma.getAlusta());
-        tetris.start();
+        tetris.peliSykli();
     }
 }

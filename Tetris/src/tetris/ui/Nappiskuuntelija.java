@@ -19,11 +19,14 @@ public class Nappiskuuntelija extends KeyAdapter {
     
     public Nappiskuuntelija(Tetris tetris){
         this.peli = tetris;
+        System.out.println("luotiin!");
     }
     
     @Override
          public void keyPressed(KeyEvent e) {
              int keycode = e.getKeyCode();
+             
+             System.out.println(this);
 
              if (keycode == 'p' || keycode == 'P') {
                  peli.pausePaallePois();
@@ -52,6 +55,7 @@ public class Nappiskuuntelija extends KeyAdapter {
                  peli.pausePaallePois();
                  break;
              }
+             System.out.println("näppäintä painettiin");
              peli.getAlusta().repaint();
          }
      }

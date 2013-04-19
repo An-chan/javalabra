@@ -23,18 +23,23 @@ public class Kayttoliittyma implements Runnable {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        System.out.println("täällä nyt");
         luoKomponentit(frame.getContentPane());
 
+        peli.setAlusta(alusta);
+        
         frame.pack();
         frame.setVisible(true);
     }
 
     private void luoKomponentit(Container container) {
+        
         Piirtoalusta pelialue = new Piirtoalusta(peli);
         this.alusta = pelialue;
-        container.add(pelialue);
         
+        System.out.println("täällä!");
         frame.addKeyListener(new Nappiskuuntelija(peli));
+        container.add(this.alusta);
     }
 
     public JFrame getFrame() {

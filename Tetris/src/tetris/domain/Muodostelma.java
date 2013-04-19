@@ -80,10 +80,12 @@ public class Muodostelma {
      * Palikkamuodostelmaa siirretään yhden ruudun verran alaspäin.
      */
     public void putoa(){
-        for (Palikka palikka : palikat) {
-            palikka.putoa();
-        }
         tormays();
+        if (putoaa){
+            for (Palikka palikka : palikat) {
+                palikka.putoa();
+            }
+        }
     }
     
     /**
@@ -94,6 +96,18 @@ public class Muodostelma {
      * @param ymuutos sijainnin muutos, 1 jos siirrytään oikealle, -1 vasemmalle
      */
     public void siirra(int ymuutos){
+        if (ymuutos < 0){
+            int vas = etsiVasenX();
+            if (vas + ymuutos < 0){
+                return;
+            }
+        }
+        if (ymuutos > 0){
+            int oik = etsiOikeaX();
+            if (oik + ymuutos > 9){
+                return;
+            }
+        }
         for (Palikka palikka : palikat){
             palikka.siirra(ymuutos);
         }
@@ -160,7 +174,11 @@ public class Muodostelma {
         }
     }
     
-    // jos muodostelma osuu johonkin, se lakkaa putoamasta
+    /**
+     * Metodi kutsuu palikoiden törmäysmetodia ja tarkastaa, osuuko joku muodostelman
+     * palikoista allaolevaan palikkaan tai ruudun alalaitaan. Mikäli mikään palikoista
+     * osuu johonkin, muodostelma lakkaa putoamasta.
+     */
     public void tormays(){
         this.tormays(peli.getPalikat());
     }
@@ -176,6 +194,37 @@ public class Muodostelma {
     
     public List<Palikka> getPalikat(){
         return this.palikat;
+    }
+    
+    /**
+     * Metodi on siirtämistä varten tarkoitettu tarkistus, jossa katsotaan missä
+     * muodostelman kaikkein vasemmanpuoleisin palikka sijaitsee.
+     * 
+     * @return int vasemmanpuoleisimman palikan x-koordinaatti
+     */
+    public int etsiVasenX(){
+        int vasX = 9;
+        for (Palikka palikka : palikat) {
+            if (palikka.getX() < vasX){
+                vasX = palikka.getX();
+            }
+        }
+        return vasX;
+    }
+    
+    /**
+     * Metodi on sama kuin yllä, mutta päinvastoin: se etsii muodostelman oikeanpuoleisimman
+     * palikan x-koordinaatin muodostelman siirtämistä varten.
+     * @return int oikeanpuoleisimman palikan x-koordinaatti
+     */
+    public int etsiOikeaX(){
+        int oikX = 0;
+        for (Palikka palikka : palikat) {
+            if (palikka.getX() > oikX){
+                oikX = palikka.getX();
+            }
+        }
+        return oikX;
     }
 
 }

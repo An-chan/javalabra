@@ -15,28 +15,31 @@ import tetris.ui.*;
  *
  * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä
  * olevista palikoista (sekä putoava muodostelma että jo kasatut palikat).
+ * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
+ * -peli ei lopu? 
+ * -paussi ei toimi
+ * -rivit poistuvat oikein mutta eivät putoa
  */
-public class Tetris extends Timer implements ActionListener {
+public class Tetris {
 
     private Muodostelma putoava;
     private Palikka[][] pelipalikat;
     private Piirtoalusta pelialue;
+    private int viive;
     private boolean pause;
     private boolean jatkuu;
     private int pisteet;
 
     public Tetris() {
-        super(1000, null);
         this.pause = false;
         this.jatkuu = true;
         this.pisteet = 0;
+        this.viive = 2000;
         this.pelipalikat = new Palikka[20][];
         for (int i = 0; i < 20; i++) {
             pelipalikat[i] = new Palikka[10];
         }
         luoUusiPutoava();
-        super.addActionListener(this);
-        super.setInitialDelay(2000);
     }
 
     /**
@@ -77,24 +80,39 @@ public class Tetris extends Timer implements ActionListener {
         this.pelialue = alusta;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (pause) {
-            super.stop();
-        }
-        if (!jatkuu) {
-        }
-        this.putoava.putoa();
-        tulosta(putoava.getPalikat());
-        if (!putoava.putoaa) { // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
-            lisaaPalikatPeliin(putoava.getPalikat());
-            luoUusiPutoava(); // luodaan uusi putoava muodostelma
-            List<Integer> tayttyneet = tarkastaTaydetRivit();
-            if (tayttyneet != null) { //tarkastetaan tuliko rivejä täyteen
-                poistaTaydetRivit(tayttyneet);
+    /**
+     * Metodi ajaa pelin normaalin syklin, jossa odotetaan viiveen ajan ja
+     * sitten pudotetaan putoavaa muodostelmaa yhden verran alaspäin. Kun
+     * muodostelma osuu johonkin ja lakkaa putoamasta, metodi kutsuu rivien
+     * täyttymisen ja täysien rivien poistavia metodeja ennen uuden muodostelman
+     * luomista ja syklin jatkumista.
+     */
+    public void peliSykli() {
+        while (jatkuu) {
+            try {
+                Thread.sleep(viive);
+            } catch (Exception e) {
             }
+            if (pause) {
+                while (pause) {
+                    //käyttiksen tekstikenttään viesti "peli pysäytetty"
+                }
+            }
+            this.putoava.putoa();
+            this.tulosta(putoava.getPalikat());
+            if (!putoava.putoaa) { // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
+                lisaaPalikatPeliin(putoava.getPalikat());
+                luoUusiPutoava(); // luodaan uusi putoava muodostelma
+                List<Integer> tayttyneet = tarkastaTaydetRivit();
+                if (tayttyneet != null) { //tarkastetaan tuliko rivejä täyteen
+                    poistaTaydetRivit(tayttyneet);
+                }
+            }
+
+            this.pelialue.repaint();
+
         }
-        this.pelialue.repaint();
+        // käyttiksen tekstikenttään lähetetään viesti "peli päättynyt"
     }
 
     /**
@@ -103,7 +121,6 @@ public class Tetris extends Timer implements ActionListener {
     public void pausePaallePois() {
         if (this.pause) {
             this.pause = false;
-            super.start();
         } else {
             this.pause = true;
         }
@@ -135,7 +152,7 @@ public class Tetris extends Timer implements ActionListener {
                 }
             }
         }
-        if (taydet.size() == 0) {
+        if (taydet.isEmpty()) {
             return null;
         }
         return taydet;
@@ -157,7 +174,7 @@ public class Tetris extends Timer implements ActionListener {
             }
         }
         this.pisteet += 100 * taydet.size();
-        super.setDelay(super.getDelay() - 100);
+        this.viive -= 50;
 
     }
 
@@ -180,15 +197,15 @@ public class Tetris extends Timer implements ActionListener {
     }
 
     /**
-     * Metodi lisää listana annetut palikat peliin oikeille paikoille.
-     * Jos pino on kasvanut kattoon asti, peli päättyy.
+     * Metodi lisää listana annetut palikat peliin oikeille paikoille. Jos pino
+     * on kasvanut kattoon asti, peli päättyy.
      *
      * @param palikat lista lisättävistä palikoista
      */
     public void lisaaPalikatPeliin(List<Palikka> palikat) {
         for (Palikka palikka : palikat) {
             pelipalikat[palikka.getY()][palikka.getX()] = palikka;
-            if (palikka.getY() == 0){
+            if (palikka.getY() == 0) {
                 jatkuu = false;
             }
         }
