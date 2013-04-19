@@ -22,8 +22,6 @@ public class Kayttoliittyma implements Runnable {
         frame.setPreferredSize(new Dimension(250, 440));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        System.out.println("täällä nyt");
         luoKomponentit(frame.getContentPane());
 
         peli.setAlusta(alusta);
@@ -37,7 +35,6 @@ public class Kayttoliittyma implements Runnable {
         Piirtoalusta pelialue = new Piirtoalusta(peli);
         this.alusta = pelialue;
         
-        System.out.println("täällä!");
         frame.addKeyListener(new Nappiskuuntelija(peli));
         container.add(this.alusta);
     }

@@ -18,7 +18,6 @@ import tetris.ui.*;
  * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
  * -peli ei lopu? 
  * -paussi ei toimi
- * -rivit poistuvat oikein mutta eivät putoa
  */
 public class Tetris {
 
@@ -99,7 +98,6 @@ public class Tetris {
                 }
             }
             this.putoava.putoa();
-            this.tulosta(putoava.getPalikat());
             if (!putoava.putoaa) { // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
                 lisaaPalikatPeliin(putoava.getPalikat());
                 luoUusiPutoava(); // luodaan uusi putoava muodostelma
@@ -167,10 +165,14 @@ public class Tetris {
     public void poistaTaydetRivit(List<Integer> taydet) {
         for (Integer i : taydet) {
             pelipalikat[i] = new Palikka[10];
-            for (int x = i; x < pelipalikat.length - 1; x++) {
-                Palikka[] temp = pelipalikat[x - 1];
-                pelipalikat[x - 1] = pelipalikat[x];
-                pelipalikat[x] = temp;
+            for (int x = i-1; x > 0; x--){
+                for (int j = 0; j < pelipalikat[x].length; j++){
+                    if (pelipalikat[x][j] != null){
+                        pelipalikat[x][j].putoa();
+                        pelipalikat[x+1][j] = pelipalikat[x][j];
+                        pelipalikat[x][j] = null;
+                    }
+                }
             }
         }
         this.pisteet += 100 * taydet.size();
