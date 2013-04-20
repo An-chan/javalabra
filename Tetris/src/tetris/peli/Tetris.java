@@ -1,12 +1,9 @@
 package tetris.peli;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import javax.swing.Timer;
 import tetris.domain.*;
 import tetris.ui.*;
 
@@ -27,11 +24,13 @@ public class Tetris {
     private boolean pause;
     private boolean jatkuu;
     private int pisteet;
+    private int taso;
 
     public Tetris() {
         this.pause = false;
         this.jatkuu = true;
         this.pisteet = 0;
+        this.taso = 1;
         this.viive = 2000;
         this.pelipalikat = new Palikka[20][];
         for (int i = 0; i < 20; i++) {
@@ -175,8 +174,24 @@ public class Tetris {
             }
         }
         this.pisteet += 100 * taydet.size();
-        this.viive *= 0.8;
+        laskeTaso();
 
+    }
+    
+    /**
+     * Metodi pitää kirjaa pisteiden kasvusta ja siten vaikeustason
+     * noususta
+     */
+    public void laskeTaso(){
+        if (pisteet < 500){
+            this.taso = 0;
+        } else if (pisteet > 100000){
+            this.taso = 10;
+            this.viive = 100;
+        } else {
+            this.taso = 1+ this.pisteet/1000;
+            this.viive = (10-taso)*200;
+        }
     }
 
     /**
