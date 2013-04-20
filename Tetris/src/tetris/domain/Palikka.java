@@ -2,7 +2,10 @@ package tetris.domain;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import javax.imageio.ImageIO;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  * @author Anni Perheentupa
@@ -18,10 +21,13 @@ public class Palikka {
     private int korkeus = 10;
     private int y;
     private int x;
+    private Image kuva;
     
     public Palikka(int x, int y){
         this.y = y;
         this.x = x;
+        ImageIcon iid = new ImageIcon(this.getClass().getResource("pilvi.png"));
+        kuva = iid.getImage();
     }
     
     /**
@@ -34,6 +40,22 @@ public class Palikka {
     public boolean tormaa(Palikka toinen){
         if (toinen.getX() == this.x){
             if (toinen.getY() == this.y +1){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Metodi tarkastaa, voidaanko palikkaa siirtää oikealle tai vasemmalle
+     * vai törmääkö se siinä toiseen palikkaan.
+     * @param toinen palikka, johon verrataan
+     * @param siirtyma x-koordinaatin muutos
+     * @return true jos törmätään, false jos ei
+     */
+    public boolean siirtymaTormaa(Palikka toinen, int siirtyma){
+        if (toinen.getY() == this.y){
+            if (toinen.getX() == this.x + siirtyma){
                 return true;
             }
         }
@@ -54,6 +76,21 @@ public class Palikka {
         }
         if (this.y >= 19){
             return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Metodi testaa siirtymisessä törmäämistä listalle palikoita.
+     * @param lista palikat, joihin verrataan
+     * @param siirtyma x-koordinaatin muutos
+     * @return true jos törmätään johonkin, false jos ei
+     */
+    public boolean siirtymaTormaa(List<Palikka> lista, int siirtyma){
+        for (Palikka palikka : lista) {
+            if (this.siirtymaTormaa(palikka, siirtyma)){
+                return true;
+            }
         }
         return false;
     }
@@ -104,10 +141,11 @@ public class Palikka {
      * @param g Graphics-luokan ilmentymä
      */
     public void piirra(Graphics g){
-        g.setColor(Color.white);
-        g.fillRect(x*20, y*20, 20, 20);
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawRect(x*20, y*20, 20, 20);
+        g.drawImage(kuva, x*20, y*20, null);
+//        g.setColor(Color.white);
+//        g.fillRect(x*20, y*20, 20, 20);
+//        g.setColor(Color.LIGHT_GRAY);
+//        g.drawRect(x*20, y*20, 20, 20);
     }
     
 }

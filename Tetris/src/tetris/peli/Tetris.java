@@ -16,8 +16,7 @@ import tetris.ui.*;
  * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä
  * olevista palikoista (sekä putoava muodostelma että jo kasatut palikat).
  * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
- * -peli ei lopu? 
- * -paussi ei toimi
+ * -vain yksi rivi poistuu kerrallaan
  */
 public class Tetris {
 
@@ -176,7 +175,7 @@ public class Tetris {
             }
         }
         this.pisteet += 100 * taydet.size();
-        this.viive -= 50;
+        this.viive *= 0.8;
 
     }
 

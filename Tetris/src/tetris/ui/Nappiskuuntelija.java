@@ -24,11 +24,7 @@ public class Nappiskuuntelija extends KeyAdapter {
     @Override
          public void keyPressed(KeyEvent e) {
              int keycode = e.getKeyCode();
-
-             if (keycode == 'p' || keycode == 'P') {
-                 peli.pausePaallePois();
-             }
-
+             
              switch (keycode) {
              case KeyEvent.VK_LEFT:
                  peli.getPutoava().siirra(-1); // jostain syystä siirtyvät kaksi ruutua?
