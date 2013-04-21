@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import tetris.peli.Tetris;
 
@@ -23,7 +24,8 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Pegasus Tetris");
-        frame.setPreferredSize(new Dimension(300, 450));
+        frame.setPreferredSize(new Dimension(250, 450));
+        frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         luoKomponentit(frame.getContentPane());
@@ -35,16 +37,45 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
+        frame.setLayout(new BorderLayout());
         Piirtoalusta pelialue = new Piirtoalusta(peli);
         this.alusta = pelialue;
+        alusta.setSize(200, 400);
         ImageIcon iid = new ImageIcon(this.getClass().getResource("taivas.png"));
         JLabel tausta = new JLabel(iid, JLabel.LEFT);
         tausta.setVerticalAlignment(JLabel.TOP);
         alusta.add(tausta); 
         
         frame.addKeyListener(new Nappiskuuntelija(peli));
-        container.add(this.alusta);
+        container.add(this.alusta, BorderLayout.CENTER);
+        luoAlaPaneeli(frame.getContentPane());
+        luoSivuPaneeli(frame.getContentPane());
     }
+    
+    private void luoSivuPaneeli(Container container){
+        JPanel sivupaneeli = new JPanel();
+        sivupaneeli.setLayout(new GridLayout(5, 1));
+        sivupaneeli.setSize(100, 100);
+        JLabel pisteetLabel = new JLabel("Pisteet");
+        JLabel pisteet = new JLabel();
+        JLabel tasoLabel = new JLabel("Taso");
+        JLabel taso = new JLabel();
+        peli.setLabels(pisteet, taso);
+        
+        sivupaneeli.add(tasoLabel);
+        sivupaneeli.add(taso);
+        sivupaneeli.add(pisteetLabel);
+        sivupaneeli.add(pisteet);
+        container.add(sivupaneeli, BorderLayout.LINE_END);
+    }
+    
+    private void luoAlaPaneeli(Container container){
+        JLabel status = new JLabel();
+        status.setSize(50, 300);
+        status.setVisible(true);
+        container.add(status, BorderLayout.PAGE_END);
+        peli.setStatusBar(status);
+    }    
 
     public JFrame getFrame() {
         return frame;

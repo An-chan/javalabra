@@ -2,8 +2,10 @@ package tetris.peli;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JLabel;
 import tetris.domain.*;
 import tetris.ui.*;
 
@@ -25,6 +27,9 @@ public class Tetris {
     private boolean jatkuu;
     private int pisteet;
     private int taso;
+    private JLabel status;
+    private JLabel pisteLabel;
+    private JLabel tasoLabel;
 
     public Tetris() {
         this.pause = false;
@@ -76,6 +81,17 @@ public class Tetris {
     public void setAlusta(Piirtoalusta alusta) {
         this.pelialue = alusta;
     }
+    
+    public void setStatusBar(JLabel status){
+        this.status = status;
+        status.setText("Paina P pysäyttääksesi pelin");
+    }
+    
+    public void setLabels(JLabel pist, JLabel taso){
+        this.tasoLabel = taso;
+        this.pisteLabel = pist;
+        paivitaPisteetJaTaso();
+    }
 
     /**
      * Metodi ajaa pelin normaalin syklin, jossa odotetaan viiveen ajan ja
@@ -92,7 +108,7 @@ public class Tetris {
             }
             if (pause) {
                 while (pause) {
-                    //käyttiksen tekstikenttään viesti "peli pysäytetty"
+                    status.setText("Peli pysäytetty, paina P jatkaaksesi");
                 }
             }
             this.putoava.putoa();
@@ -108,7 +124,7 @@ public class Tetris {
             this.pelialue.repaint();
 
         }
-        // käyttiksen tekstikenttään lähetetään viesti "peli päättynyt"
+        status.setText("Peli päättynyt");
     }
 
     /**
@@ -161,6 +177,7 @@ public class Tetris {
      * @param taydet lista poistettavista riveistä
      */
     public void poistaTaydetRivit(List<Integer> taydet) {
+        Collections.sort(taydet);
         for (Integer i : taydet) {
             pelipalikat[i] = new Palikka[10];
             for (int x = i-1; x > 0; x--){
@@ -175,7 +192,7 @@ public class Tetris {
         }
         this.pisteet += 100 * taydet.size();
         laskeTaso();
-
+        paivitaPisteetJaTaso();
     }
     
     /**
@@ -184,7 +201,7 @@ public class Tetris {
      */
     public void laskeTaso(){
         if (pisteet < 500){
-            this.taso = 0;
+            this.taso = 1;
         } else if (pisteet > 100000){
             this.taso = 10;
             this.viive = 100;
@@ -192,6 +209,15 @@ public class Tetris {
             this.taso = 1+ this.pisteet/1000;
             this.viive = (10-taso)*200;
         }
+    }
+    
+    /**
+     * Metodi lähettää tämänhetkisen pistetilanteen käyttöliittymään
+     * pelaajalle näytettäväksi.
+     */
+    public void paivitaPisteetJaTaso(){
+        this.pisteLabel.setText(""+this.pisteet);
+        this.tasoLabel.setText(""+this.taso);
     }
 
     /**
@@ -237,6 +263,10 @@ public class Tetris {
 
     public int getPisteet() {
         return this.pisteet;
+    }
+    
+    public int getTaso(){
+        return this.taso;
     }
 
     /**

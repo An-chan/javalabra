@@ -96,6 +96,9 @@ public class Muodostelma {
      * @param ymuutos sijainnin muutos, 1 jos siirrytään oikealle, -1 vasemmalle
      */
     public void siirra(int ymuutos){
+        if (peli.onkoPause()){
+            return;
+        }
         if (ymuutos < 0){
             int vas = etsiVasenX();
             if (vas + ymuutos < 0){
@@ -120,6 +123,9 @@ public class Muodostelma {
      * Huom! I-muodostelman kierto toistaiseksi rikki!
      * */
     public void kierra(){
+        if (peli.onkoPause()){
+            return;
+        }
         int keskiY = palikat.get(1).getY();
         int keskiX = palikat.get(1).getX();
         if (this.muoto == Muoto.nelio){

@@ -13,7 +13,7 @@ public class Piirtoalusta extends JPanel{
     public Piirtoalusta(Tetris peli){
         this.peli = peli;
         super.setSize(400, 200);
-        super.setBackground(Color.CYAN);
+        super.setBackground(Color.WHITE);
     }
     
     public Muodostelma haePutoava(){

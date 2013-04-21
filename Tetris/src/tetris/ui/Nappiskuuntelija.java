@@ -27,7 +27,7 @@ public class Nappiskuuntelija extends KeyAdapter {
              
              switch (keycode) {
              case KeyEvent.VK_LEFT:
-                 peli.getPutoava().siirra(-1); // jostain syystä siirtyvät kaksi ruutua?
+                 peli.getPutoava().siirra(-1);
                  break;
              case KeyEvent.VK_RIGHT:
                  peli.getPutoava().siirra(1);
