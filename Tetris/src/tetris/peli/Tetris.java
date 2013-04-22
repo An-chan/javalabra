@@ -1,7 +1,6 @@
 package tetris.peli;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +14,8 @@ import tetris.ui.*;
  * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä
  * olevista palikoista (sekä putoava muodostelma että jo kasatut palikat).
  * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
- * -vain yksi rivi poistuu kerrallaan
+ * - palikat osuvat toisiinsa sivuttain
+ * - uusi peli EI TOIMI enkä yhtään tiedä miksi
  */
 public class Tetris {
 
@@ -105,11 +105,13 @@ public class Tetris {
             try {
                 Thread.sleep(viive);
             } catch (Exception e) {
+                status.setText("Jotain meni vikaan...");
             }
             if (pause) {
                 while (pause) {
                     status.setText("Peli pysäytetty, paina P jatkaaksesi");
                 }
+                status.setText("Paina P pysäyttääksesi pelin");
             }
             this.putoava.putoa();
             if (!putoava.putoaa) { // kun putoava muodostelma törmää, sen palikat lisätään pelipalikoihin
@@ -124,7 +126,7 @@ public class Tetris {
             this.pelialue.repaint();
 
         }
-        status.setText("Peli päättynyt");
+        status.setText("Peli päättynyt, paina Enter aloittaaksesi alusta");
     }
 
     /**
@@ -140,6 +142,10 @@ public class Tetris {
 
     public boolean onkoPause() {
         return this.pause;
+    }
+    
+    public boolean getJatkuu(){
+        return this.jatkuu;
     }
 
     /**
@@ -177,7 +183,9 @@ public class Tetris {
      * @param taydet lista poistettavista riveistä
      */
     public void poistaTaydetRivit(List<Integer> taydet) {
-        Collections.sort(taydet);
+        if (taydet.size() > 1){
+            Collections.sort(taydet);
+        }
         for (Integer i : taydet) {
             pelipalikat[i] = new Palikka[10];
             for (int x = i-1; x > 0; x--){
@@ -200,15 +208,11 @@ public class Tetris {
      * noususta
      */
     public void laskeTaso(){
-        if (pisteet < 500){
-            this.taso = 1;
-        } else if (pisteet > 100000){
-            this.taso = 10;
-            this.viive = 100;
-        } else {
-            this.taso = 1+ this.pisteet/1000;
-            this.viive = (10-taso)*200;
+        if (this.pisteet >= taso*500){
+            taso++;
         }
+        this.viive = 2000/taso;
+        
     }
     
     /**
@@ -252,6 +256,22 @@ public class Tetris {
             }
         }
     }
+    
+    public void aloitaUusiPeli(){
+        this.pause = false;
+        this.jatkuu = true;
+        this.pisteet = 0;
+        this.taso = 1;
+        this.viive = 2000;
+        this.pelipalikat = new Palikka[20][];
+        for (int i = 0; i < 20; i++) {
+            pelipalikat[i] = new Palikka[10];
+        }
+        luoUusiPutoava();
+        paivitaPisteetJaTaso();
+        status.setText("Paina P pysäyttääksesi pelin");
+//        peliSykli();
+    }
 
     public Muodostelma getPutoava() {
         return this.putoava;
@@ -268,6 +288,7 @@ public class Tetris {
     public int getTaso(){
         return this.taso;
     }
+    
 
     /**
      * Debuggaamiseen tarkoitettu metodi, joka tulostaa palikoiden

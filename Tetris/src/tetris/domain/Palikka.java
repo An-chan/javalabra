@@ -1,9 +1,7 @@
 package tetris.domain;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.imageio.ImageIO;
 import java.util.List;
 import javax.swing.ImageIcon;
 

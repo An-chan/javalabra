@@ -27,24 +27,44 @@ public class Nappiskuuntelija extends KeyAdapter {
              
              switch (keycode) {
              case KeyEvent.VK_LEFT:
+                 if (peli.onkoPause()){
+                     break;
+                 }
                  peli.getPutoava().siirra(-1);
                  break;
              case KeyEvent.VK_RIGHT:
+                 if (peli.onkoPause()){
+                     break;
+                 }
                  peli.getPutoava().siirra(1);
                  break;
              case KeyEvent.VK_DOWN:
+                 if (peli.onkoPause()){
+                     break;
+                 }
                  peli.getPutoava().putoa();
                  break;
              case KeyEvent.VK_UP:
+                 if (peli.onkoPause()){
+                     break;
+                 }
                  peli.getPutoava().kierra();
                  break;
              case KeyEvent.VK_SPACE:
+                 if (peli.onkoPause()){
+                     break;
+                 }
                  while (peli.getPutoava().putoaa){
                      peli.getPutoava().putoa();
                  }
                  break;
              case KeyEvent.VK_P:
                  peli.pausePaallePois();
+                 break;
+             case KeyEvent.VK_ENTER:
+                 if (!peli.getJatkuu()){
+                     peli.aloitaUusiPeli();
+                 }
                  break;
              }
              peli.getAlusta().repaint();

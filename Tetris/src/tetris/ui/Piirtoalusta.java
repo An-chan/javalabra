@@ -2,7 +2,6 @@ package tetris.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.List;
 import javax.swing.JPanel;
 import tetris.domain.*;
 import tetris.peli.Tetris;

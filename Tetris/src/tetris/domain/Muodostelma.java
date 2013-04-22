@@ -116,6 +116,7 @@ public class Muodostelma {
         }
     }
     
+    
     /** 
      *  Muodostelmaa kierretään aina oikealle, käyttäen palikkaa nro 1 
      *  (eli toista palikkaa) keskipisteenä.
@@ -138,7 +139,7 @@ public class Muodostelma {
             this.Ikierto();
             return;
         }
-        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiX +1 > 10 || keskiY+1 > 19){
+        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiX +1 >= 10 || keskiY+1 > 19){
             return;
         }
         for (int i = 0; i < palikat.size(); i++){

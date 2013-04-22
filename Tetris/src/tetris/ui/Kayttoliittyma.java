@@ -44,6 +44,7 @@ public class Kayttoliittyma implements Runnable {
         ImageIcon iid = new ImageIcon(this.getClass().getResource("taivas.png"));
         JLabel tausta = new JLabel(iid, JLabel.LEFT);
         tausta.setVerticalAlignment(JLabel.TOP);
+        tausta.setSize(200, 400);
         alusta.add(tausta); 
         
         frame.addKeyListener(new Nappiskuuntelija(peli));

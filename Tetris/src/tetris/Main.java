@@ -1,7 +1,6 @@
 package tetris;
 
 import javax.swing.SwingUtilities;
-import tetris.domain.*;
 import tetris.peli.Tetris;
 import tetris.ui.Kayttoliittyma;
 
