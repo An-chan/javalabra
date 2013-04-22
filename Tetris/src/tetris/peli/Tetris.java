@@ -14,7 +14,7 @@ import tetris.ui.*;
  * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä
  * olevista palikoista (sekä putoava muodostelma että jo kasatut palikat).
  * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
- * - palikat osuvat toisiinsa sivuttain
+ * - palikat voidaan kiertää sisäkkäin
  * - uusi peli EI TOIMI enkä yhtään tiedä miksi
  */
 public class Tetris {
@@ -208,8 +208,26 @@ public class Tetris {
      * noususta
      */
     public void laskeTaso(){
-        if (this.pisteet >= taso*500){
-            taso++;
+        if (pisteet < 500){
+            taso = 1;
+        } else if (pisteet < 1200){
+            taso = 2;
+        } else if (pisteet < 2200){
+            taso = 3;
+        } else if (pisteet < 3500){
+            taso = 4;
+        } else if (pisteet < 5000){
+            taso = 5;
+        } else if (pisteet < 6500){
+            taso = 6;
+        } else if (pisteet < 8500){
+            taso = 7;
+        } else if (pisteet < 11000){
+            taso = 8;
+        } else if (pisteet < 13000){
+            taso = 9;
+        } else {
+            taso = 10;
         }
         this.viive = 2000/taso;
         
@@ -270,7 +288,7 @@ public class Tetris {
         luoUusiPutoava();
         paivitaPisteetJaTaso();
         status.setText("Paina P pysäyttääksesi pelin");
-//        peliSykli();
+//        peliSykli();  // Jumittaa ohjelman, miksi?
     }
 
     public Muodostelma getPutoava() {
@@ -287,6 +305,10 @@ public class Tetris {
     
     public int getTaso(){
         return this.taso;
+    }
+    
+    public Palikka[][] getPalikkaTaulukko(){
+        return this.pelipalikat;
     }
     
 

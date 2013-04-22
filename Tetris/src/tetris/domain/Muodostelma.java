@@ -95,24 +95,27 @@ public class Muodostelma {
      * 
      * @param ymuutos sijainnin muutos, 1 jos siirrytään oikealle, -1 vasemmalle
      */
-    public void siirra(int ymuutos){
+    public void siirra(int xMuutos){
         if (peli.onkoPause()){
             return;
         }
-        if (ymuutos < 0){
+        if (xMuutos < 0){
             int vas = etsiVasenX();
-            if (vas + ymuutos < 0){
+            if (vas + xMuutos < 0){
                 return;
             }
         }
-        if (ymuutos > 0){
+        if (xMuutos > 0){
             int oik = etsiOikeaX();
-            if (oik + ymuutos > 9){
+            if (oik + xMuutos > 9){
                 return;
             }
+        }
+        if (siirtoTormays(xMuutos)){
+            return;
         }
         for (Palikka palikka : palikat){
-            palikka.siirra(ymuutos);
+            palikka.siirra(xMuutos);
         }
     }
     
@@ -120,8 +123,6 @@ public class Muodostelma {
     /** 
      *  Muodostelmaa kierretään aina oikealle, käyttäen palikkaa nro 1 
      *  (eli toista palikkaa) keskipisteenä.
-     * 
-     * Huom! I-muodostelman kierto toistaiseksi rikki!
      * */
     public void kierra(){
         if (peli.onkoPause()){
@@ -197,6 +198,22 @@ public class Muodostelma {
                 return;
             }
         }
+    }
+    
+    /**
+     * Metodi tarkastaa törmäykset tilanteissa, joissa muodostelmaa siirretään oikealle
+     * tai vasemmalle.
+     * @param xMuutos x-koordinaatin haluttu muutos
+     * @return true jos törmää, false jos ei
+     */
+    public boolean siirtoTormays(int xMuutos){
+        Palikka[][] pelipalikat = peli.getPalikkaTaulukko();
+        for (Palikka palikka : this.palikat) {
+            if (pelipalikat[palikka.getY()][palikka.getX()+xMuutos] != null){
+                return true;
+            }
+        }
+        return false;
     }
     
     public List<Palikka> getPalikat(){
