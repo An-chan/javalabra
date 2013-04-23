@@ -81,6 +81,7 @@ public class Muodostelma {
      */
     public void putoa(){
         tormays();
+        System.out.println("Putoaa edelleen");
         if (putoaa){
             for (Palikka palikka : palikat) {
                 palikka.putoa();

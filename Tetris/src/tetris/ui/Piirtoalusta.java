@@ -22,6 +22,7 @@ public class Piirtoalusta extends JPanel{
     @Override
     public void paint(Graphics g){
         super.paint(g);
+        System.out.println("Piirtyy edelleen");
         for (Palikka palikka : peli.getPalikat()){
             palikka.piirra(g);
         }

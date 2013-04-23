@@ -102,6 +102,7 @@ public class Tetris {
      */
     public void peliSykli() {
         while (jatkuu) {
+            System.out.println("hoi");
             try {
                 Thread.sleep(viive);
             } catch (Exception e) {
@@ -124,6 +125,7 @@ public class Tetris {
             }
 
             this.pelialue.repaint();
+            System.out.println("Päästään tänne asti" + pelialue);
 
         }
         status.setText("Peli päättynyt, paina Enter aloittaaksesi alusta");
@@ -270,7 +272,9 @@ public class Tetris {
         for (Palikka palikka : palikat) {
             pelipalikat[palikka.getY()][palikka.getX()] = palikka;
             if (palikka.getY() == 0) {
+                System.out.println("Ei pitäisi tapahtua");
                 jatkuu = false;
+                break;
             }
         }
     }
@@ -288,7 +292,8 @@ public class Tetris {
         luoUusiPutoava();
         paivitaPisteetJaTaso();
         status.setText("Paina P pysäyttääksesi pelin");
-//        peliSykli();  // Jumittaa ohjelman, miksi?
+        peliSykli();  // Ei toimi, miksi? Pääsee pelisykliin, mutta ei ota näppäinkomentoja
+                        // eikä päivitä käyttistä enää ollenkaan
     }
 
     public Muodostelma getPutoava() {

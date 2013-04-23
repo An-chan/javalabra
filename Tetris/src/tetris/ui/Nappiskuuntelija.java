@@ -25,6 +25,8 @@ public class Nappiskuuntelija extends KeyAdapter {
          public void keyPressed(KeyEvent e) {
              int keycode = e.getKeyCode();
              
+             System.out.println("Keyevent tapahtuu");
+             
              switch (keycode) {
              case KeyEvent.VK_LEFT:
                  if (peli.onkoPause()){
@@ -63,7 +65,7 @@ public class Nappiskuuntelija extends KeyAdapter {
                  break;
              case KeyEvent.VK_ENTER:
                  if (!peli.getJatkuu()){
-                     peli.aloitaUusiPeli();
+                     peli.aloitaUusiPeli(); // tässä vika!!!!11111!!
                  }
                  break;
              }

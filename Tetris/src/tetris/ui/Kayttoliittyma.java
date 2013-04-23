@@ -24,7 +24,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Pegasus Tetris");
-        frame.setPreferredSize(new Dimension(250, 450));
+        frame.setPreferredSize(new Dimension(250, 420));
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -43,7 +43,6 @@ public class Kayttoliittyma implements Runnable {
         alusta.setSize(200, 400);
         ImageIcon iid = new ImageIcon(this.getClass().getResource("taivas.png"));
         JLabel tausta = new JLabel(iid, JLabel.LEFT);
-        tausta.setVerticalAlignment(JLabel.TOP);
         tausta.setSize(200, 400);
         alusta.add(tausta); 
         
