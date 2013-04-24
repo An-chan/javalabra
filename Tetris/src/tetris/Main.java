@@ -11,6 +11,8 @@ public class Main {
         Tetris tetris = new Tetris();
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(tetris);
         SwingUtilities.invokeLater(kayttoliittyma);
-        tetris.peliSykli();
+        while (true){
+            tetris.peliSykli();
+        }
     }
 }

@@ -13,9 +13,8 @@ import tetris.ui.*;
  *
  * Tetris-luokka käsittelee pelialueen toimintoja ja pitää kirjaa pelissä
  * olevista palikoista (sekä putoava muodostelma että jo kasatut palikat).
- * **!!**Korjaamattomia ongelmia toistaiseksi:**!!**
- * - palikat voidaan kiertää sisäkkäin
- * - uusi peli EI TOIMI enkä yhtään tiedä miksi
+ * Lisäksi luokka pitää kirjaa pisteistä ja vaikeustasosta, ja alustaa kaikki
+ * muuttujat oletusarvoihin uuden pelin alkaessa.
  */
 public class Tetris {
 
@@ -27,6 +26,7 @@ public class Tetris {
     private boolean jatkuu;
     private int pisteet;
     private int taso;
+    private int alkutaso;
     private JLabel status;
     private JLabel pisteLabel;
     private JLabel tasoLabel;
@@ -36,6 +36,7 @@ public class Tetris {
         this.jatkuu = true;
         this.pisteet = 0;
         this.taso = 1;
+        this.alkutaso = 0;
         this.viive = 2000;
         this.pelipalikat = new Palikka[20][];
         for (int i = 0; i < 20; i++) {
@@ -102,7 +103,6 @@ public class Tetris {
      */
     public void peliSykli() {
         while (jatkuu) {
-            System.out.println("hoi");
             try {
                 Thread.sleep(viive);
             } catch (Exception e) {
@@ -125,7 +125,6 @@ public class Tetris {
             }
 
             this.pelialue.repaint();
-            System.out.println("Päästään tänne asti" + pelialue);
 
         }
         status.setText("Peli päättynyt, paina Enter aloittaaksesi alusta");
@@ -210,29 +209,40 @@ public class Tetris {
      * noususta
      */
     public void laskeTaso(){
+        
         if (pisteet < 500){
-            taso = 1;
+            taso = alkutaso + 1;
         } else if (pisteet < 1200){
-            taso = 2;
+            taso = alkutaso + 2;
         } else if (pisteet < 2200){
-            taso = 3;
+            taso = alkutaso + 3;
         } else if (pisteet < 3500){
-            taso = 4;
+            taso = alkutaso + 4;
         } else if (pisteet < 5000){
-            taso = 5;
+            taso = alkutaso + 5;
         } else if (pisteet < 6500){
-            taso = 6;
+            taso = alkutaso + 6;
         } else if (pisteet < 8500){
-            taso = 7;
+            taso = alkutaso + 7;
         } else if (pisteet < 11000){
-            taso = 8;
+            taso = alkutaso + 8;
         } else if (pisteet < 13000){
-            taso = 9;
+            taso = alkutaso + 9;
         } else {
-            taso = 10;
+            taso = alkutaso + 10;
         }
         this.viive = 2000/taso;
         
+    }
+    
+    /**
+     * Metodi nostaa vaikeustasoa, jolloin pelin varsinaiset tasot skaalautuvat
+     * yhden tason verran ylöspäin.
+     */
+    public void nostaVaikeustasoa(){
+        this.alkutaso++;
+        laskeTaso();
+        paivitaPisteetJaTaso();
     }
     
     /**
@@ -240,6 +250,9 @@ public class Tetris {
      * pelaajalle näytettäväksi.
      */
     public void paivitaPisteetJaTaso(){
+        if (this.pisteLabel == null | this.tasoLabel == null){
+            return;
+        }
         this.pisteLabel.setText(""+this.pisteet);
         this.tasoLabel.setText(""+this.taso);
     }
@@ -272,7 +285,6 @@ public class Tetris {
         for (Palikka palikka : palikat) {
             pelipalikat[palikka.getY()][palikka.getX()] = palikka;
             if (palikka.getY() == 0) {
-                System.out.println("Ei pitäisi tapahtua");
                 jatkuu = false;
                 break;
             }
@@ -284,6 +296,7 @@ public class Tetris {
         this.jatkuu = true;
         this.pisteet = 0;
         this.taso = 1;
+        this.alkutaso = 0;
         this.viive = 2000;
         this.pelipalikat = new Palikka[20][];
         for (int i = 0; i < 20; i++) {
@@ -292,8 +305,6 @@ public class Tetris {
         luoUusiPutoava();
         paivitaPisteetJaTaso();
         status.setText("Paina P pysäyttääksesi pelin");
-        peliSykli();  // Ei toimi, miksi? Pääsee pelisykliin, mutta ei ota näppäinkomentoja
-                        // eikä päivitä käyttistä enää ollenkaan
     }
 
     public Muodostelma getPutoava() {

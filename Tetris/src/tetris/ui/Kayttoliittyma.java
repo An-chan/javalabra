@@ -24,7 +24,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Pegasus Tetris");
-        frame.setPreferredSize(new Dimension(250, 420));
+        frame.setPreferredSize(new Dimension(250, 450));
         frame.setResizable(false);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -62,10 +62,10 @@ public class Kayttoliittyma implements Runnable {
         JLabel taso = new JLabel();
         peli.setLabels(pisteet, taso);
         
-        sivupaneeli.add(tasoLabel);
-        sivupaneeli.add(taso);
         sivupaneeli.add(pisteetLabel);
         sivupaneeli.add(pisteet);
+        sivupaneeli.add(tasoLabel);
+        sivupaneeli.add(taso);
         container.add(sivupaneeli, BorderLayout.LINE_END);
     }
     

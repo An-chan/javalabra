@@ -81,7 +81,6 @@ public class Muodostelma {
      */
     public void putoa(){
         tormays();
-        System.out.println("Putoaa edelleen");
         if (putoaa){
             for (Palikka palikka : palikat) {
                 palikka.putoa();
@@ -141,7 +140,7 @@ public class Muodostelma {
             this.Ikierto();
             return;
         }
-        if (keskiX-1 < 0 || keskiY-1 < 0 || keskiX +1 >= 10 || keskiY+1 > 19){
+        if (tarkastaKierto()){
             return;
         }
         for (int i = 0; i < palikat.size(); i++){
@@ -167,6 +166,76 @@ public class Muodostelma {
                 tama.siirraKierrossa(0, -2);
             }
         }
+    }
+    
+    /**
+     * TEE TÄMÄ
+     * @return 
+     */
+    public boolean tarkastaKierto(){
+        Palikka[][] pelipalikat = peli.getPalikkaTaulukko();
+        
+        int keskiY = palikat.get(1).getY();
+        int keskiX = palikat.get(1).getX();
+        
+        for (int i = 0; i < palikat.size(); i++){
+            if (i == 1){
+                continue;
+            }
+            Palikka tama = palikat.get(i);
+            int tamaX = tama.getX();
+            int tamaY = tama.getY();
+            if (tamaX == keskiX && tamaY == keskiY-1){
+                if (tamaX +1 > 9 || tamaY + 1 > 19){
+                    return true;
+                } else if (pelipalikat[tamaY+1][tamaX+1] != null){
+                    return true;
+                }
+            } else if (tamaX == keskiX && tamaY == keskiY+1){
+                if (tamaX -1 < 0 || tamaY -1 < 0){
+                    return true;
+                } else if (pelipalikat[tamaY-1][tamaX-1] != null){
+                    return true;
+                }
+            } else if (tamaX == keskiX+1 && tamaY == keskiY){
+                if (tamaX -1 < 0 || tamaY +1 > 19){
+                    return true;
+                } else if (pelipalikat[tamaY+1][tamaX-1] != null){
+                    return true;
+                }
+            } else if (tama.getX() == keskiX-1 && tama.getY() == keskiY){ //keskikohdan vasemmalla
+                if (tamaX +1 > 9 || tamaY -1 < 0){
+                    return true;
+                } else if (pelipalikat[tamaY-1][tamaX+1] != null){
+                    return true;
+                }
+            } else if (tama.getX() == keskiX+1 && tama.getY() == keskiY-1){ //keskikohdan yläoikealla
+                if (tamaY +2 > 19){
+                    return true;
+                } else if (pelipalikat[tamaY+2][tamaX] != null){
+                    return true;
+                }
+            }  else if (tama.getX() == keskiX-1 && tama.getY() == keskiY-1){ //keskikohdan ylävasemmalla
+                if (tamaX +2 > 9){
+                    return true;
+                } else if (pelipalikat[tamaY][tamaX+2] != null){
+                    return true;
+                }
+            }  else if (tama.getX() == keskiX+1 && tama.getY() == keskiY+1){ //keskikohdan alaoikealla
+                if (tamaX -2 < 0){
+                    return true;
+                } else if (pelipalikat[tamaY][tamaX-2] != null){
+                    return true;
+                }
+            }  else if (tama.getX() == keskiX-1 && tama.getY() == keskiY+1){ //keskikohdan alavasemmalla
+                if (tamaY -2 < 0){
+                    return true;
+                } else if (pelipalikat[tamaY-2][tamaX] != null){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public void Ikierto(){
