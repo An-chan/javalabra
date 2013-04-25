@@ -79,21 +79,6 @@ public class Tetris {
         }
     }
 
-    public void setAlusta(Piirtoalusta alusta) {
-        this.pelialue = alusta;
-    }
-    
-    public void setStatusBar(JLabel status){
-        this.status = status;
-        status.setText("Paina P pysäyttääksesi pelin");
-    }
-    
-    public void setLabels(JLabel pist, JLabel taso){
-        this.tasoLabel = taso;
-        this.pisteLabel = pist;
-        paivitaPisteetJaTaso();
-    }
-
     /**
      * Metodi ajaa pelin normaalin syklin, jossa odotetaan viiveen ajan ja
      * sitten pudotetaan putoavaa muodostelmaa yhden verran alaspäin. Kun
@@ -291,6 +276,10 @@ public class Tetris {
         }
     }
     
+    /**
+     * Alustaa kaikki pelin arvot uudelleen oletusarvoihin, jotta uusi pelisykli
+     * voidaan aloittaa.
+     */
     public void aloitaUusiPeli(){
         this.pause = false;
         this.jatkuu = true;
@@ -319,6 +308,11 @@ public class Tetris {
         return this.pisteet;
     }
     
+    // debuggaamista varten
+    public void setPisteet(int pisteet){
+        this.pisteet = pisteet;
+    }
+    
     public int getTaso(){
         return this.taso;
     }
@@ -327,6 +321,20 @@ public class Tetris {
         return this.pelipalikat;
     }
     
+    public void setAlusta(Piirtoalusta alusta) {
+        this.pelialue = alusta;
+    }
+    
+    public void setStatusBar(JLabel status){
+        this.status = status;
+        status.setText("Paina P pysäyttääksesi pelin");
+    }
+    
+    public void setLabels(JLabel pist, JLabel taso){
+        this.tasoLabel = taso;
+        this.pisteLabel = pist;
+        paivitaPisteetJaTaso();
+    }
 
     /**
      * Debuggaamiseen tarkoitettu metodi, joka tulostaa palikoiden

@@ -4,14 +4,19 @@ Toteutetaan ohjelma, jossa kasataan putoavia palikoita aukottomiksi riveiksi, jo
 
 Palikat ilmestyvät ruudun ylälaitaan erilaisissa neljän palikan muodostelmissa ja putoavat kohti ruudun alalaitaa tasaisella vauhdilla. Kun pelaaja saa kokonaisen rivin valmiiksi, se katoaa ruudulta ja antaa tilaa seuraaville palikoille. Pelaajan pistemäärä myös kasvaa. Pistemäärän kasvaessa palikoiden putoamisvauhti kiihtyy hiljalleen, jolloin pelin vaikeustaso kasvaa. Pelin voi laittaa paussille milloin tahansa, jolloin palikkamuodostelman putoaminen pysähtyy eikä pelaaja voi liikuttaa sitä ennen paussin lopettamista.
 
-Pelaaja voi siirtää palikkamuodostelmia oikealle ja vasemmalle, kiertää niitä vasta- tai myötäpäivään, kiihdyttää niiden putoamista, tai tiputtaa ne välittömästi pinon päälle. Palikkamuodostelmat pysyvät aina yhteisinä ja niiden muoto on aina sama.
+Pelaaja voi siirtää palikkamuodostelmia oikealle ja vasemmalle, kiertää niitä myötäpäivään, kiihdyttää niiden putoamista tai tiputtaa ne välittömästi pinon päälle. Palikkamuodostelmat pysyvät aina yhteisinä ja niiden muoto on aina sama.
+
+Lisäksi pelaaja voi korottaa pelin vaikeustasoa (palikkamuodostelmien putoamisnopeutta) halunsa mukaan.
 
 Käyttäjät: Pelaaja
 
 Pelaajan toiminnot:
 - Palikkamuodostelman siirtäminen (oikealle, vasemmalle, alas)
 - Palikkamuodostelman tiputtaminen
-- Palikkamuodostelman kiertäminen (vasta- tai myötäpäivään)
+- Palikkamuodostelman kiertäminen (myötäpäivään)
+- Vaikeustason korottaminen
+- Pelin pysäytys ja palautus pysäytystilasta
+- Uuden pelin aloittaminen edellisen päättyessä
 
 Pelin toiminnot:
 - Palikkamuodostelmien tuottaminen

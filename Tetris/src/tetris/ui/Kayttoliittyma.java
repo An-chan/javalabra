@@ -11,6 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import tetris.peli.Tetris;
 
+/**
+ * Luokka toteuttaa pelin käyttöliittymän luomalla ikkunan ja lisäämällä
+ * siihen tarvittavat komponentit.
+ * 
+ * @author Anni
+ */
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
@@ -52,6 +58,12 @@ public class Kayttoliittyma implements Runnable {
         luoSivuPaneeli(frame.getContentPane());
     }
     
+    /**
+     * Luo ikkunan oikeassa reunassa näkyvän paneelin, joka näyttää
+     * käyttäjän keräämät pisteet ja pelin senhetkisen vaikeustason
+     * 
+     * @param container 
+     */
     private void luoSivuPaneeli(Container container){
         JPanel sivupaneeli = new JPanel();
         sivupaneeli.setLayout(new GridLayout(5, 1));
@@ -69,6 +81,13 @@ public class Kayttoliittyma implements Runnable {
         container.add(sivupaneeli, BorderLayout.LINE_END);
     }
     
+    /**
+     * Luo ikkunan alalaidan statuspaneelin, joka kertoo, onko peli
+     * pysäytetty, käynnissä, vai päättynyt ja antaa pelaajalle ohjeita
+     * tilan muuttamiseksi.
+     * 
+     * @param container 
+     */
     private void luoAlaPaneeli(Container container){
         JLabel status = new JLabel();
         status.setSize(50, 300);

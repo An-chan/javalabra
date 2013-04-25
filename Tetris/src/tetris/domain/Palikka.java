@@ -9,14 +9,14 @@ import javax.swing.ImageIcon;
  * @author Anni Perheentupa
  * 
  * Tämä luokka käsittelee pelin Palikka-olioiden ominaisuuksia ja toimintoja,
- * kuten niiden siirtämistä ja törmäämistä. Muodostelmille on oma luokkansa.
+ * kuten niiden siirtämistä ja törmäämistä. Muodostelmille on oma luokkansa,
+ * joka hoitaa muodostelmaan kuuluvien palikoiden joukkotoiminnot kutsumalla
+ * Palikka-luokkaa.
  * 
  * @see Muodostelma
  */
 
 public class Palikka {
-    private int leveys = 10;
-    private int korkeus = 10;
     private int y;
     private int x;
     private Image kuva;
@@ -67,8 +67,8 @@ public class Palikka {
      * @return boolean: kertoo, törmääkö palikka vai ei
      */
     public boolean tormaa(List<Palikka> lista){
-        for (Palikka palikka : lista) {
-            if (this.tormaa(palikka)){
+        for (int i = 0; i < lista.size(); i++){
+            if (this.tormaa(lista.get(i))){
                 return true;
             }
         }
@@ -85,8 +85,8 @@ public class Palikka {
      * @return true jos törmätään johonkin, false jos ei
      */
     public boolean siirtymaTormaa(List<Palikka> lista, int siirtyma){
-        for (Palikka palikka : lista) {
-            if (this.siirtymaTormaa(palikka, siirtyma)){
+        for (int i = 0; i < lista.size(); i++){
+            if (this.siirtymaTormaa(lista.get(i), siirtyma)){
                 return true;
             }
         }
@@ -140,10 +140,6 @@ public class Palikka {
      */
     public void piirra(Graphics g){
         g.drawImage(kuva, x*20, y*20, null);
-//        g.setColor(Color.white);
-//        g.fillRect(x*20, y*20, 20, 20);
-//        g.setColor(Color.LIGHT_GRAY);
-//        g.drawRect(x*20, y*20, 20, 20);
     }
     
 }

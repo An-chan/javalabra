@@ -6,6 +6,14 @@ import javax.swing.JPanel;
 import tetris.domain.*;
 import tetris.peli.Tetris;
 
+/**
+ * Luokka toimii pelikenttänä ja hoitaa palikoiden piirtämisen aina tarvittaessa.
+ * Se kutsuu palikoiden omaa piirra-metodia tämän toteuttaakseen.
+ *
+ * @author Anni
+ * 
+ * @see Palikka
+ */
 public class Piirtoalusta extends JPanel{
     private Tetris peli;
     

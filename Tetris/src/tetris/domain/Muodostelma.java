@@ -169,8 +169,10 @@ public class Muodostelma {
     }
     
     /**
-     * TEE TÄMÄ
-     * @return 
+     * Metodi tarkastaa, voidaanko kierrossa tarvittavat siirto-operaatiot
+     * tehdä osumatta toisiin palikoihin tai menemättä läpi seinistä.
+     * 
+     * @return true jos törmätään, false jos ei
      */
     public boolean tarkastaKierto(){
         Palikka[][] pelipalikat = peli.getPalikkaTaulukko();

@@ -133,4 +133,65 @@ public class TetrisPeliTest {
         peli.poistaTaydetRivit(poistettavat);
         assertEquals(peli.getPisteet(), 100);
     }
+    
+    @Test
+    public void tasonKasvuOikeinPienetTest(){
+        peli.setPisteet(200);
+        peli.laskeTaso();
+        assertEquals(1, peli.getTaso());
+        peli.setPisteet(600);
+        peli.laskeTaso();
+        assertEquals(2, peli.getTaso());
+        peli.setPisteet(1190);
+        peli.laskeTaso();
+        assertEquals(2, peli.getTaso());
+        peli.setPisteet(1200);
+        peli.laskeTaso();
+        assertEquals(3, peli.getTaso());
+    }
+    
+    @Test
+    public void tasonKasvuOikeinSuuretTest(){
+        peli.setPisteet(10000);
+        peli.laskeTaso();
+        assertEquals(8, peli.getTaso());
+        peli.setPisteet(11100);
+        peli.laskeTaso();
+        assertEquals(9, peli.getTaso());
+        peli.setPisteet(8400);
+        peli.laskeTaso();
+        assertEquals(7, peli.getTaso());
+        peli.setPisteet(12900);
+        peli.laskeTaso();
+        assertEquals(9, peli.getTaso());
+        peli.setPisteet(13000);
+        peli.laskeTaso();
+        assertEquals(10, peli.getTaso());
+    }
+    
+    @Test
+    public void vaikeustasonKasvatusToimiiTest(){
+        peli.nostaVaikeustasoa();
+        peli.laskeTaso();
+        assertEquals(2, peli.getTaso());
+        peli.nostaVaikeustasoa();
+        peli.nostaVaikeustasoa();
+        peli.nostaVaikeustasoa();
+        peli.laskeTaso();
+        assertEquals(5, peli.getTaso());
+    }
+    
+    @Test
+    public void vaikeustasonKasvatusSuuriMaaraTest(){
+        for (int i = 1; i < 20; i++){
+            peli.nostaVaikeustasoa();
+        }
+        peli.laskeTaso();
+        assertEquals(20, peli.getTaso());
+        for (int i = 0; i < 10; i++){
+            peli.nostaVaikeustasoa();
+        }
+        peli.laskeTaso();
+        assertEquals(30, peli.getTaso());
+    }
 }
