@@ -1,0 +1,21 @@
+-*Pegasus-Tetriksen k‰yttˆohje*-
+
+Tervetuloa pelaamaan Pegasus-Tetrist‰!
+
+Pelin tarkoituksena on j‰rjest‰‰ ikkunan yl‰laidasta putoavat pilvimuodostelmat yhten‰isiksi riveiksi. T‰m‰ tehd‰‰n liikuttamalla muodostelmia nuolin‰pp‰imill‰ tai kiert‰m‰ll‰ niit‰ ylˆs-nuolin‰pp‰imell‰, jotta ne mahtuvat ruudulle parhaiten. Kun rivi on muodostettu, se katoaa ja taivas pysyy kirkkaana. Tarkoituksena on pit‰‰ taivas mahdollismman pilvettˆm‰n‰ ja ker‰t‰ pisteit‰, joita saa rivien tuhoamisesta. Kun pisteit‰ kertyy lis‰‰, vaikeustaso nousee ja pilvimuodostelmat putoavat nopeammin. Tasoja on yhteens‰ kymmenen. Jos pilvimassa ylt‰‰ ruudun yl‰laitaan asti, peli on h‰vitty.
+
+Jos peli tuntuu liian hitaalta, voi vaikeustasoa nostaa Page Up -n‰pp‰imell‰. N‰in vaikeustasoa voi kasvattaa rajattomasti oman maun mukaan, ja peliss‰ ansaittavat tasot skaalautuvatsen mukaisesti (eli jos nostat vaikeustason heti alussa tasolle 3, voit saavuttaa korkeimmillaan tason 13). Pid‰ kuitenkin varasi, sill‰ vaikeustasoa ei voi en‰‰ madaltaa kun sit‰ on nostettu.
+
+P-n‰pp‰in pys‰ytt‰‰ pelin tilap‰isesti, jolloin muodostelma lakkaa putoamasta eik‰ pelaaja voi manipuloida sit‰ mitenk‰‰n. Pys‰ytystilasta p‰‰se pois painamalla uudestaan P-n‰pp‰int‰.
+
+Kun pelin h‰vi‰‰, voi uuden pelin aloittaa saman tien enter-n‰pp‰imell‰. Jos haluaa lopettaa pelin kokonaan, voi t‰m‰n tehd‰ sulkemalla ikkunan.
+
+N‰pp‰imet ja niiden toiminnot:
+Nuoli oikealle:		Siirt‰‰ putoavaa muodostelmaa oikealle
+Nuoli vasemmalle:	Siirt‰‰ putoavaa muodostelmaa vasemmalle
+Nuoli ylˆs:		Kiert‰‰ putoavaa muodostelmaa myˆt‰p‰iv‰‰n
+Nuoli alas:		Pudottaa muodostelmaa yhden ruudun alasp‰in
+V‰lilyˆnti:		Pudottaa muodostelman niin alas kuin mahdollista
+Page Up:		Nostaa vaikeustasoa (ei vaikuta pisteisiin)
+Enter:			Aloittaa uuden pelin
+P: 			Pelin pys‰ytystila p‰‰lle/pois
