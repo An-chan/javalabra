@@ -1,0 +1,9 @@
+Rakennekuvaus
+
+Palikoiden toimintoja hallitsee luokka Palikka, jossa esimerkiksi kaikki siirtämiseen, kiertämiseen, putoamiseen ja törmäämiseen liittyvät toiminnot suoritetaan.
+
+Palikoista muodostetaan muodostelmia eli Muodostelma-luokan ilmentymiä siten, että niillä on aina muoto, ts. jokin Muoto-enumista löytyvä muuttuja. Tällä hetkellä muotoja on seitsemän, mutta muotojen valikoimaa voidaan halutessa laajentaa. Muodostelma-luokka hallitsee siihen kuuluvien palikoiden joukkotoimintoja, joten se esimerkiksi kutsuu siirrä-metodia kaikille palikoilleen kun sitä siirretään pelikentällä. Lisäksi se tarkistaa pelaajan yrittämien siirtojen ja kiertojen oikeellisuuden ennen Palikka-luokan kutsumista.
+
+Pelin varsinaista kulkua hallitsee luokka Tetris, josta löytyvät pelikentän oleelliset toiminnot, kuten pelin sykli. Tetris-luokan tehtäviin kuuluuvat esimerkiksi kirjanpito peliin tulleista palikoista, pisteistä sekä tasoista, täysien rivien tarkastaminen ja poistaminen, käyttöliittymän päivitys, ja vaikeustason nostaminen tason noustessa.
+
+Käyttöliittymä koostuu sekin muutamasta erilillisestä luokasta. Piirtoalusta-luokka pyytää Tetris-luokalta kaikkien palikoiden tiedot ja piirtää ne käyttöliittymään. Nappiskuuntelija-luokka vastaanottaa pelaajan syötteet näppäimistöstä ja lähettää ne eteenpäin pelin olioille, esim. puotavaa muodostelmaa kiertäessä. Käyttöliittymä-luokka sisältää näiden kahden olion lisäksi kaikki muut käyttöliittymän komponentit, kuten statuspaneelin ja pisteet sekä tason ilmoittavan sivupaneelin, jotka kaikki kommunikoivat Tetris-luokan kanssa päivittääkseen pelaajalle välittyvät tiedot.

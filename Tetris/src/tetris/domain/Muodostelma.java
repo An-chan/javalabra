@@ -309,7 +309,7 @@ public class Muodostelma {
     }
     
     /**
-     * Metodi on sama kuin yllä, mutta päinvastoin: se etsii muodostelman oikeanpuoleisimman
+     * Metodi etsii muodostelman oikeanpuoleisimman
      * palikan x-koordinaatin muodostelman siirtämistä varten.
      * @return int oikeanpuoleisimman palikan x-koordinaatti
      */

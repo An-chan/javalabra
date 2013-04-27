@@ -2,6 +2,7 @@ package tetris.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.List;
 import javax.swing.JPanel;
 import tetris.domain.*;
 import tetris.peli.Tetris;
@@ -30,11 +31,13 @@ public class Piirtoalusta extends JPanel{
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        for (Palikka palikka : peli.getPalikat()){
-            palikka.piirra(g);
+        List<Palikka> pelipalikat = peli.getPalikat();
+        for (int i = 0; i < pelipalikat.size(); i++){
+            pelipalikat.get(i).piirra(g);
         }
-        for (Palikka palikka : peli.getPutoava().getPalikat()){
-            palikka.piirra(g);
+        List<Palikka> pudPalikat = peli.getPutoava().getPalikat();
+        for (int i = 0; i < pudPalikat.size(); i++){
+            pudPalikat.get(i).piirra(g);
         }
     }
 

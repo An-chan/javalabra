@@ -112,7 +112,7 @@ public class Tetris {
             this.pelialue.repaint();
 
         }
-        status.setText("Peli päättynyt, paina Enter aloittaaksesi alusta");
+        status.setText("Peli päättynyt! Enter aloittaa uuden pelin");
     }
 
     /**
